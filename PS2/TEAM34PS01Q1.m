@@ -10,3 +10,4 @@ while error > 1*10^(-6)
     error = abs((computed - actual)/actual);
 end
 disp(h)
+
