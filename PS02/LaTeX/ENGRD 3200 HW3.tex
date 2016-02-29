@@ -3,6 +3,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{caption}
+\usepackage{hyperref}
 \usepackage{float}
 \usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
 \usepackage{epstopdf}
@@ -195,7 +196,7 @@ root = xr;
 
 \subsection*{B}
 
-Example code from MathWorks \textbf{INSERT LINK} was modified to produce the secant method while also outputting information for each iteration:
+Example code from MathWorks at \href{http://www.mathworks.com/matlabcentral/fileexchange/36737-secant-method/content/secant.m}{http://www.mathworks.com/matlabcentral/fileexchange/36737-secant-method/content/secant.m} was modified to produce the secant method while also outputting information for each iteration:
 
 \begin{lstlisting}
 % It will take function and initial value as the input of function. 
@@ -240,10 +241,58 @@ y = c;
 [        7]    [           0.4574]    [      0.4529]    [        0.0322]
 [        8]    [           0.4529]    [      0.4513]    [        0.0012]
 [        9]    [           0.4513]    [      0.4511]    [    6.0377e-06]
+
+
+
+\end{lstlisting}
+
+\subsection*{C}
+
+\subsection*{D}
+
+The following script was used to find the first root of the equation $ f(x) = \tan(\pi x) -x -6 $ using all three methods to within an approximate relative error of $ 10^{-6} $ for the Newton-Raphson and secant methods and $ 10^{-5} $ for the bisection method.  The script then plots the approximate relative error as a function of iteration number.
+
+\begin{lstlisting}
+% Gathers together tables of iterations and relative error
+% Plots these
+
+% Create function and derivative
+
+fx = @(x) tan(pi*x) -x -6;
+df = @(x) pi*(sec(pi*x))^2 -1;
+
+% Get bisect data
+[mass blah ea iter bsect]=bisect(fx,.4,.48,.001,100);
+bsect1 = cell2mat(bsect(2:16,:)); %Convert to numeric values
+
+% Get Newton-Raphson data
+[root,ea,iter,nr] = newtraph(fx,df,0.48,.0001,25);
+nr1 = cell2mat(nr(2:7,:)); %Convert to numeric values
+
+% Get secant data
+[y,sc] = secant(fx,0.54,.48,.0001);
+sc1 = cell2mat(sc(2:10,:)); %Convert to numeric values
+
+close all
+
+figure(1)
+semilogy(bsect1(1:15,1),bsect1(1:15,5),'-o')
+hold on
+plot(nr1(1:6,1),nr1(1:6,4),'-o')
+plot(sc1(1:9,1),sc1(1:9,4),'-o')
+legend('Bisect','Newton-Raphson','Secant')
+xlabel('Iteration')
+ylabel('log_{10}Error')
+hold off
+
 \end{lstlisting}
 
 
-
+\begin{figure}[H]
+\centering
+\includegraphics[width=5in]{Problem2.eps}
+\caption{Approximate relative error as a function of iteration number}
+\end{figure}
 
 
 
