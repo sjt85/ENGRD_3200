@@ -16,16 +16,20 @@ nr1 = cell2mat(nr(2:7,:)); %Convert to numeric values
 
 % Get secant data
 [y,sc] = secant(fx,0.54,.48,.0001);
-sc1 = cell2mat(sc(2:10,:)); %Convert to numeric values
+sc1 = cell2mat(sc(2:12,:)); %Convert to numeric values
 
 close all
 
 figure(1)
-semilogy(bsect1(1:15,1),bsect1(1:15,5),'-o')
+semilogy(bsect1(:,1),bsect1(:,5),'-o')
 hold on
-plot(nr1(1:6,1),nr1(1:6,4),'-o')
-plot(sc1(1:9,1),sc1(1:9,4),'-o')
+plot(nr1(:,1),nr1(:,4),'-o')
+plot(sc1(:,1),sc1(:,4),'-o')
 legend('Bisect','Newton-Raphson','Secant')
 xlabel('Iteration')
 ylabel('log_{10}(Approx Error)')
+ax = gca;
+ax.XTick = [0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15];
+grid on
+box on
 hold off

@@ -248,6 +248,54 @@ y = c;
 
 \subsection*{C}
 
+The Newton-Raphson method formula is $ x_{i+1} = x_i - \dfrac{f(x_i)}{f'(x_i)} $.  For this problem,
+
+\begin{align*}
+f(x) &= \tan(\pi x) -x -6 \\
+f'(x) &= \pi \sec^2(\pi x) -1
+\end{align*}
+
+\noindent Our initial guess is $ x_1 = 0.48 $.  So,
+
+\begin{flalign*}
+x_2 &= x_1 - \frac{f(x_1)}{f'(x_1)} = 0.48 - \frac{\tan(0.48 \pi) - 0.48 - 6}{ \pi \sec^2 (0.48 \pi) -1} = 0.468170  & \\
+\epsilon_a &= \Big| \frac{0.468170 - 0.48}{0.48} \Big| * 100 \% = 2.46 \% 
+\end{flalign*}
+
+\begin{table}[H]
+\centering
+%\caption{Newton-Raphson}
+\begin{tabular}{r r r r}
+Iteration & Previous Estimate & New Estimate & Percent Approx Error \\ \hline
+1         & 0.48              & 0.468170     & 2.46\%              
+\end{tabular}
+\end{table}
+
+
+\noindent The secant method formula is $ x_{i+1} = x_i = \dfrac{f(x_i)(x_{i-1} - x_i)}{f(x_{i-1}) - f(x_i)} $
+
+\hspace{10pt}
+
+\noindent Our initial guesses are $ x_1 = 0.48 $ , $x_0 = 0.54 $
+
+\begin{flalign*}
+x_2 &= x_1 - \frac{f(x_1) (x_0 - x_1)}{f(x_0) - f(x_1)} & \\
+  &= 0.48 - \frac{ (\tan(0.48 \pi) - 0.48 - 6)(0.54-0.48)}{(\tan(0.54 \pi) - 0.54 - 6)( \tan(0.48 \pi) - 0.48 -6)} & \\
+  &= 0.503664 & \\ \\
+\epsilon_a &= \Big| \frac{0.503664 - 0.48}{0.48} \Big| * 100 \% = 4.93  \% \\
+\end{flalign*}
+
+\begin{table}[H]
+\centering
+%\caption{Secant method}
+\begin{tabular}{r r r r}
+Iteration & Previous Estimate & New Estimate & Percent Approx Error \\ \hline
+1         & 0.48              & 0.503664     & 4.93 \%              
+\end{tabular}
+\end{table}
+
+
+
 \subsection*{D}
 
 The following script was used to find the first root of the equation $ f(x) = \tan(\pi x) -x -6 $ using all three methods to within an approximate relative error of $ 10^{-6} $ for the Newton-Raphson and secant methods and $ 10^{-5} $ for the bisection method.  The script then plots the approximate relative error as a function of iteration number.
@@ -271,31 +319,39 @@ nr1 = cell2mat(nr(2:7,:)); %Convert to numeric values
 
 % Get secant data
 [y,sc] = secant(fx,0.54,.48,.0001);
-sc1 = cell2mat(sc(2:10,:)); %Convert to numeric values
+sc1 = cell2mat(sc(2:12,:)); %Convert to numeric values
 
 close all
 
 figure(1)
-semilogy(bsect1(1:15,1),bsect1(1:15,5),'-o')
+semilogy(bsect1(:,1),bsect1(:,5),'-o')
 hold on
-plot(nr1(1:6,1),nr1(1:6,4),'-o')
-plot(sc1(1:9,1),sc1(1:9,4),'-o')
+plot(nr1(:,1),nr1(:,4),'-o')
+plot(sc1(:,1),sc1(:,4),'-o')
 legend('Bisect','Newton-Raphson','Secant')
 xlabel('Iteration')
-ylabel('log_{10}Error')
+ylabel('log_{10}(Approx Error)')
+ax = gca;
+ax.XTick = [0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15];
+grid on
+box on
 hold off
-
 \end{lstlisting}
 
+\subsection*{E}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=5in]{Problem2.eps}
+\includegraphics[width=6.5in]{Problem2.eps}
 \caption{Approximate relative error as a function of iteration number}
 \end{figure}
 
+The Newton-Raphson method converged the most quickly (it had the steepest slope) since it is taking an exact derivative of the function, whereas the secant method takes the derivative through a finite difference method and thus has an associated truncation error.  The Newton-Raphson method converges quadratically, whereas the secant method converges super linearly and the bisection method converges linearly.  Thus the two open methods converge far more quickly than the bisection method.
 
 
+\subsection*{F}
+
+For the bisection method, the ratio $ \dfrac{ |\epsilon_{k+1} |}{|\epsilon_k|^m} $ converges to $ 0.5 $.
 
 
 
