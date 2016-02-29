@@ -7,16 +7,18 @@
 
 function [y,cell] = secant(f,a,b,maxerr)
 c = (a*f(b) - b*f(a))/(f(b) - f(a));
+error = abs (b-a)/(b)*100;
 iter = 1;       
 cell = {'Iteration','Previous estimate','New estimate','Relative error'};
-while abs(f(c)) > maxerr
+while error > maxerr
     a = b;
     b = c;
     c = (a*f(b) - b*f(a))/(f(b) - f(a));
+    error = abs (b-a)/(a)*100;
     cell{iter+1,1} = iter;
     cell{iter+1,2} = a;
     cell{iter+1,3} = b;
-    cell{iter+1,4} = abs(f(c));
+    cell{iter+1,4} = error;
     iter = iter + 1;
     if(iter == 25)
         break;
