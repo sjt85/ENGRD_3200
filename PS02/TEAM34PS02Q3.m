@@ -1,14 +1,14 @@
 % newtraph: Newton-Raphson root location zeroes
 % uses Newton-Raphson method to find the root of func
 
-func = @(x) tanh(x^2-9);   % name of function
+func = @(x) tanh(x^2-9);           % name of function
 dfunc = @(x) 2*x*(sech(9-x^2)^2);  % name of derivative of function
-xr = 3.2;      % initial guess
-maxit = 4;     % maximum allowbale iterations
-es = 0.0001;   % desired relative error
+xr = 3.2;                          % initial guess
+maxit = 4;                         % maximum allowbale iterations
+es = 0.0001;                       % desired relative error
 
 cell = {'Iteration','Previous estimate','New estimate','Percent approx error'};
-iter = 0;      % nmber of iterations
+iter = 0;                          % nmber of iterations
 
 while (1)
     xrold = xr;
@@ -25,3 +25,9 @@ while (1)
 end
 root = xr;
 disp (cell)
+NRnew = cell2mat(cell(2:5,:));        %Convert to numeric values
+figure (1)
+plot (NRnew(1:4,1),NRnew(1:4,3))
+xlabel('Iteration')
+ylabel('New Estimate')
+title ('Iteration vs. New Estimate')
