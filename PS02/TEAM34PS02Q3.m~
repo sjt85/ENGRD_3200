@@ -27,7 +27,7 @@ root = xr;
 disp (cell)
 NRnew = cell2mat(cell(2:5,:));        %Convert to numeric values
 figure (1)
-semilogy (NRnew(1:4,1),NRnew(1:4,4))
+plot (NRnew(1:4,1),NRnew(1:4,4))
 xlabel('Iteration')
 ylabel('Error')
 title ('Iteration vs. Error')
