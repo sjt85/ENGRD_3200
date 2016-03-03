@@ -33,3 +33,44 @@ ax.XTick = [0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15];
 grid on
 box on
 hold off
+
+% Part (f) of question 2
+mB = 1;     % Bisection method has linear convergence 
+mNR = 2;    % NR method has quadratio convergence
+mS = 1.618; % Secant method has 1.618 of convergence rate
+BRatio = [];
+NRRatio = [];
+SRatio = [];
+
+% BRatio stores (Ei+1)/(Ei^m) for each iterations for Bisection Method
+for k = 1:14
+    ratio = bsect1(k+1,5)/(bsect1(k,5)^mB);
+    BRatio = [BRatio ratio];
+end
+figure (2)
+xlabel('Iteration')
+ylabel('(Ei+1)/(Ei^m)')
+title ('Iteration vs. A (Ei+1/(Ei^m))') 
+plot (bsect1(1:14),BRatio)
+
+% NRRatio stores (Ei+1)/(Ei^m) for each iterations for Newton-Raphson Method
+for k = 1:5
+    ratio = nr1(k+1,4)/(nr1(k,4)^mNR);
+    NRRatio = [NRRatio ratio];
+end
+figure(3)
+xlabel('Iteration')
+ylabel('(Ei+1)/(Ei^m)')
+title ('Iteration vs. A (Ei+1/(Ei^m))') 
+plot (nr1(1:5),NRRatio)
+
+% SRatio stores (Ei+1)/(Ei^m) for each iterations for Secant Method
+for k = 1:10
+    ratio = sc1(k+1,4)/(sc1(k,4)^mS);
+    SRatio = [SRatio ratio];
+end
+figure(4)
+xlabel('Iteration')
+ylabel('(Ei+1)/(Ei^m)')
+title ('Iteration vs. A (Ei+1/(Ei^m))') 
+plot (sc1(1:10),SRatio)
