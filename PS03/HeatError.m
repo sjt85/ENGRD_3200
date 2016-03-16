@@ -1,4 +1,4 @@
-function [] = TEAM34PS03Q3()
+function [] = HeatError()
 
 % Forms the tridiagonal matrix A
 % Uses the previously-developed LU factorization and substitution methods
