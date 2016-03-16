@@ -1,13 +1,27 @@
+function [] = TEAM34PS03Q3()
+
 % Forms the tridiagonal matrix A
-% Uses the previously-developed LU factorization and substitution code 
+% Uses the previously-developed LU factorization and substitution methods
 % to solve this matrix
 % Finds the associated error norm
 % Solves using the Thomas algorithm and compares
+
+ErrMatrix = zeros(3,9);   % Set up a matrix to store N vs. max error
+ErrMatrix(1,:) = [5 10 20 40 80 200 500 1000 2000];
+
+for j = 1:length(ErrMatrix(1,:))
+    N = ErrMatrix(1,j);
+    [A b x_exact] = formA(N);   % Call subroutine to construct matrix
+    
+    
+end
+
 
 
 
 
 function [A b x] = formA(N)
+% Subroutine for heat equation matrix
 % Creates the tridiagonal matrix A found using the heat equation
 % Creates the RHS vector b from the sine function
 % Returns the exact solution as a vector x
@@ -35,7 +49,7 @@ for i = 1 : N-1
     x(i) = sin(pi*h*i)/pi^2;
 end
 
-
+end
 
 end
 
