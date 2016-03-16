@@ -10,24 +10,24 @@ Ratio = [];
 for k = 1:length(N)
     TotalTime1 = 0;
     TotalTime2 = 0;
+    A = rand(N(k),N(k));
+    b = rand(N(k),1);
     for j = 1:100
-        A = rand(N(k),N(k));
-        b = rand(N(k),1);
+        tic
+        x2 = A \ b;
+        time_elapsed1 = toc;
+        TotalTime1 = TotalTime1 + time_elapsed1;
         [L, U, P] = lu(A);
         tic
         x1 = U \ (L \ ( P * b));
         time_elapsed2 = toc;
         TotalTime2 = TotalTime2 + time_elapsed2;
-        tic
-        x2 = A \ b;
-        time_elapsed1 = toc;
-        TotalTime1 = TotalTime1 + time_elapsed1;
     end
-    Ave1 = TotalTime1 / 100;
-    time_GE = [time_GE Ave1];
-    Ave2 = TotalTime2 / 100;
-    time_BF = [time_BF Ave2];
-    ratio = Ave1 / Ave2;
+    AveGE = TotalTime1 / 100;
+    time_GE = [time_GE AveGE];
+    AveBF = TotalTime2 / 100;
+    time_BF = [time_BF AveBF];
+    ratio = AveGE / AveBF;
     Ratio = [Ratio ratio];
 end
 
