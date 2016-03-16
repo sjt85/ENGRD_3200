@@ -6,31 +6,37 @@ function [] = TEAM34PS03Q3()
 % Finds the associated error norm
 % Solves using the Thomas algorithm and compares
 
-ErrMatrix = zeros(3,9);   % Set up a matrix to store N vs. max error
+ErrMatrix = zeros(2,9);   % Set up a matrix to store N vs. max error
 ErrMatrix(1,:) = [5 10 20 40 80 200 500 1000 2000];
 
-for j = 1:length(ErrMatrix(1,:))
+for j = 1:length(ErrMatrix(1,:))  % Populate error matrix
     N = ErrMatrix(1,j);
-    [A,b,x_exact] = formA(N);   % Call subroutine to construct matrix
+    [A,b,x_exact] = formA(N);     % Call subroutine to construct A
     
     % Gauss
-    xg = A \ b;
+    xg = A\b;
     xg_err = abs(x_exact - xg);
-    ErrMatrix(2,j) = max(xg_err);
+    xg_err_max = max(xg_err);
     
     % LU
     [L,U,P] = lu(A);
     xlu = U \ ( L \ ( P * b ) );
     xlu_err = abs(x_exact - xlu);
-    ErrMatrix(3,j) = max(xlu_err);
+    xlu_err_max = max(xlu_err);
+    
+    ErrMatrix(2,j) = max(xg_err_max,xlu_err_max);
 end
 
-
-begin figure(1)
-loglog(ErrMatrix(1,:),ErrMatrix(2,:))
+close all
+figure(1)
+loglog(ErrMatrix(1,:),ErrMatrix(2,:),'-s')
 hold on
-plot(ErrMatrix(1,:),ErrMatrix(3,:))
+xlabel('Number of nodes (N)')
+ylabel('Absolute error E_t^{(max)}')
+legend('Error from LU and Gauss elimination')
+grid on
 hold off
+
 
 
 
@@ -44,8 +50,8 @@ function [A,b,x] = formA(N)
 % N is the number of nodes
 
 A = zeros(N-1,N-1);  % Initialize matrix with all zeros
-b = zeros(N-1);      % Initialize RHS vector
-x = zeros(N-1);      % Initialize exact solution
+b = zeros(N-1,1);      % Initialize RHS vector
+x = zeros(N-1,1);      % Initialize exact solution
 h = 1/N;
 
 % Form the diagonal
