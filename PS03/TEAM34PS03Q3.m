@@ -11,16 +11,32 @@ ErrMatrix(1,:) = [5 10 20 40 80 200 500 1000 2000];
 
 for j = 1:length(ErrMatrix(1,:))
     N = ErrMatrix(1,j);
-    [A b x_exact] = formA(N);   % Call subroutine to construct matrix
+    [A,b,x_exact] = formA(N);   % Call subroutine to construct matrix
     
+    % Gauss
+    xg = A \ b;
+    xg_err = abs(x_exact - xg);
+    ErrMatrix(2,j) = max(xg_err);
     
+    % LU
+    [L,U,P] = lu(A);
+    xlu = U \ ( L \ ( P * b ) );
+    xlu_err = abs(x_exact - xlu);
+    ErrMatrix(3,j) = max(xlu_err);
 end
 
 
+begin figure(1)
+loglog(ErrMatrix(1,:),ErrMatrix(2,:))
+hold on
+plot(ErrMatrix(1,:),ErrMatrix(3,:))
+hold off
 
 
 
-function [A b x] = formA(N)
+
+
+function [A,b,x] = formA(N)
 % Subroutine for heat equation matrix
 % Creates the tridiagonal matrix A found using the heat equation
 % Creates the RHS vector b from the sine function
