@@ -26,10 +26,10 @@ for k = 1:length(N)
     time_GE = [time_GE Ave2];
 end
 figure
+hold on
 title ('Average time vs N')
 xlabel('Size of the matrix')
 ylabel('Time to solve the linear system')
-plot(N,time_GE)
-hold on
-plot(N,time_BF)
+plot(N,time_GE,'-ro',N,time_BF,'-.b')
+legend ('Gaussian Elimination','LU factorization')
 hold off
