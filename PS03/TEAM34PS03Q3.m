@@ -27,5 +27,15 @@ x_err_max = max(x_err);
 
 fprintf('The maximum error for N = %6.0f is %2.2s \n',N,x_err_max);
 
+close all
+
+figure(1)
+hold on
+box on
+plot(x,'r')
+xlabel('Node')
+ylabel('Temperature')
+hold off
+
 end
 
