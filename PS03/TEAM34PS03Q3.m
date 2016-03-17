@@ -23,9 +23,10 @@ end
 x = Tridiag(e,f,g,r);  % Call the Thomas algorithm solver
 x = x.';  % Transpose
 x_err = abs(x_exact - x);
-x_err_max = max(x_err);
+[x_err_max(1),x_err_max(2)] = max(x_err);
 
-fprintf('The maximum error for N = %6.0f is %2.2s \n',N,x_err_max);
+fprintf('The maximum error for N = %6.0f is %2.2s at node %6.0f \n',...
+    N,x_err_max(1),x_err_max(2));
 
 close all
 

@@ -1,4 +1,4 @@
-function [] = HeatError()
+function [ ] = HeatError()
 
 % Forms the tridiagonal matrix A
 % Uses the previously-developed LU factorization and substitution methods
@@ -8,6 +8,7 @@ function [] = HeatError()
 
 ErrMatrix = zeros(2,9);   % Set up a matrix to store N vs. max error
 ErrMatrix(1,:) = [5 10 20 40 80 200 500 1000 2000];
+
 
 for j = 1:length(ErrMatrix(1,:))  % Populate error matrix
     N = ErrMatrix(1,j);
