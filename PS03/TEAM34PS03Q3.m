@@ -20,10 +20,12 @@ for i = 1 : N
     x_exact(i) = sin(pi*h*i)/pi^2;
 end
 
-r_err = abs(x_exact - r);
-r_err_max = max(r_err);
+x = Tridiag(e,f,g,r);  % Call the Thomas algorithm solver
+x = x.';  % Transpose
+x_err = abs(x_exact - x);
+x_err_max = max(x_err);
 
-fprintf('The maximum error for N = %6.0f is %2.2s \n',N,r_err_max);
+fprintf('The maximum error for N = %6.0f is %2.2s \n',N,x_err_max);
 
 end
 
