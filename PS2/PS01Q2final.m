@@ -11,7 +11,7 @@ title('time(seconds) vs sea surface elevation (meters)')
 df = zeros (1,43199);
 h=1;
 for i = 1+h:h:length(t)-h
-    df(i-1) = (f(i+h)-f(i-h))/2*h;
+    df(i-1) = (f(i+h)-f(i-h))/(2*h);
 end
 figure(2)
 hold on
@@ -37,7 +37,7 @@ fprintf('The maximum error with h=1 second is %d \n',maxerror);
 % Find the optimal h value that minimizes the total error
 hArray = [];
 maxErrArray = [];
-for h = logspace(0,4,50)
+for h = logspace(0,4,50);
     k = 1;
     df = [];
     analytical = [];

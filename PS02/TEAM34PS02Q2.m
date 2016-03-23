@@ -48,10 +48,12 @@ for k = 1:14
     BRatio = [BRatio ratio];
 end
 figure (2)
+hold on
 xlabel('Iteration')
 ylabel('(Ei+1)/(Ei^m)')
 title ('Iteration vs. A (Ei+1/(Ei^m))') 
 plot (bsect1(1:14),BRatio)
+hold off
 
 % NRRatio stores (Ei+1)/(Ei^m) for each iterations for Newton-Raphson Method
 for k = 1:5
@@ -59,10 +61,12 @@ for k = 1:5
     NRRatio = [NRRatio ratio];
 end
 figure(3)
+hold on
 xlabel('Iteration')
 ylabel('(Ei+1)/(Ei^m)')
 title ('Iteration vs. A (Ei+1/(Ei^m))') 
 plot (nr1(1:5),NRRatio)
+hold off
 
 % SRatio stores (Ei+1)/(Ei^m) for each iterations for Secant Method
 for k = 1:10
@@ -70,7 +74,9 @@ for k = 1:10
     SRatio = [SRatio ratio];
 end
 figure(4)
+hold on
 xlabel('Iteration')
 ylabel('(Ei+1)/(Ei^m)')
 title ('Iteration vs. A (Ei+1/(Ei^m))') 
 plot (sc1(1:10),SRatio)
+hold off

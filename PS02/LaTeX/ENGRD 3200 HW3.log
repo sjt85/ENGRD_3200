@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.2.24)  28 FEB 2016 21:43
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.2.24)  28 FEB 2016 23:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -565,66 +565,64 @@ File: omspcr.fd
 )
 LaTeX Font Info:    Font shape `OMS/pcr/m/n' in size <8> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 70.
- [2] [3] [4]
+ [2] [3] [4] [5]
 Package epstopdf Info: Source file: <Problem2.eps>
-(epstopdf)                    date: 2016-02-28 21:40:51
-(epstopdf)                    size: 40340 bytes
+(epstopdf)                    date: 2016-02-28 22:44:16
+(epstopdf)                    size: 53716 bytes
 (epstopdf)             Output file: <Problem2-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-02-28 22:44:33
+(epstopdf)                    size: 10759 bytes
 (epstopdf)             Command: <repstopdf --outfile=Problem2-eps-converted-to.
 pdf Problem2.eps>
-(epstopdf)             \includegraphics on input line 293.
-runsystem(repstopdf --outfile=Problem2-eps-converted-to.pdf Problem2.eps)...exe
-cuted safely (allowed).
+(epstopdf)             \includegraphics on input line 345.
+Package epstopdf Info: Output file is already uptodate.
 
-Package epstopdf Info: Result file: <Problem2-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-02-28 21:43:40
-(epstopdf)                    size: 9860 bytes.
-
-<Problem2-eps-converted-to.pdf, id=213, 616.3025pt x 387.4475pt>
+<Problem2-eps-converted-to.pdf, id=235, 537.00626pt x 389.455pt>
 File: Problem2-eps-converted-to.pdf Graphic file (type pdf)
 
 <use Problem2-eps-converted-to.pdf>
-Package pdftex.def Info: Problem2-eps-converted-to.pdf used on input line 293.
-(pdftex.def)             Requested size: 361.34999pt x 227.17317pt.
- [5]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 303.
- [6 <./Problem2-eps-converted-to.pdf>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 303.
+Package pdftex.def Info: Problem2-eps-converted-to.pdf used on input line 345.
+(pdftex.def)             Requested size: 469.75499pt x 340.68314pt.
+ [6]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 359.
+ [7 <./Problem2-eps-converted-to.pdf>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 359.
 
 (./ENGRD 3200 HW3.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 303.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 303.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 359.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 359.
 Package rerunfilecheck Info: File `"ENGRD 3200 HW3".out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 303.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 359.
  ) 
 Here is how much of TeX's memory you used:
- 9712 strings out of 493304
- 143824 string characters out of 6139871
+ 9726 strings out of 493304
+ 143989 string characters out of 6139871
  409654 words of memory out of 5000000
- 12863 multiletter control sequences out of 15000+600000
+ 12868 multiletter control sequences out of 15000+600000
  10553 words of font info for 39 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 36i,9n,42p,391b,1744s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,12n,42p,514b,1744s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/urw/courier/ucrr8a.pfb>
-Output written on "ENGRD 3200 HW3.pdf" (6 pages, 178221 bytes).
+f-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+urw/courier/ucrr8a.pfb>
+Output written on "ENGRD 3200 HW3.pdf" (7 pages, 192591 bytes).
 PDF statistics:
- 357 PDF objects out of 1000 (max. 8388607)
- 324 compressed objects within 4 object streams
- 205 named destinations out of 1000 (max. 500000)
+ 376 PDF objects out of 1000 (max. 8388607)
+ 341 compressed objects within 4 object streams
+ 214 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
