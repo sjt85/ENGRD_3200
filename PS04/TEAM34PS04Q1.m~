@@ -20,14 +20,14 @@ for k = 1:r
     SumCurr = sum(absa(:,k));        % Compute the sum of each column
     ColumnSum = [ColumnSum SumCurr]; % Store the sum into a vector
 end
-% a1 is the 1-norm of matrix a
+% x is the max absolute column sum
 a1 = max(ColumnSum);
 ColumnSum = [];
 for k = 1:r
     SumCurr = sum(aInv(:,k));        % Compute the sum of each column
     ColumnSum = [ColumnSum SumCurr]; % Store the sum into a vector
 end
-% aInv1 is the 1-norm of inverse matrix a
+% x is the max absolute column sum
 aInv1 = max(ColumnSum);
 x = a1 * aInv1;
 end
@@ -45,9 +45,8 @@ for k = 1:c
     SumCurr = sum(absa(k,:));        % Compute the sum of each row
     RowSum = [RowSum SumCurr];       % Store the sum into a vector
 end
-% aInf is the infinity norm of matrix a
+% aInf is the infinity norm of 
 aInf = max(RowSum);
-
 RowSum = [];
 for k = 1:c
     SumCurr = sum(aInv(k,:));        % Compute the sum of each row
