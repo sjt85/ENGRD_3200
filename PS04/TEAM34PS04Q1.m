@@ -1,6 +1,5 @@
-function [ConA1, ConAInf, ConAInv1, ConAInvInf]= TEAM34PS04Q1()
+function [ConA1, ConAInf, ConAInv1, ConAInvInf]= TEAM34PS04Q1(A)
 % The script computes norms and condition numbers for a given matrix
-A = [100 0 -100; 0 100 -100; -100 -100 300];
 ConA1 = CondA1 (A);
 ConAInf = CondInf(A);
 AInv = inv(A);
