@@ -1,5 +1,10 @@
 function [ConA1, ConAInf, ConAInv1, ConAInvInf]= TEAM34PS04Q1()
-% The script computes norms and condition numbers for a given matrix
+% This function computes condition numbers for a given matrix and the
+% condition number for its inverse matrix
+% ConA1 is the condition number for matrix A using A1 norms
+% ConAInf is the condition number for matrix A using Infinity norms
+% ConAInv1 is the condition number for inverse matrix A using A1 norms
+% ConAInvInf is the condition number for INVERSE matrix A using Infinity norms
 A = [100 0 -100; 0 100 -100; -100 -100 300];
 ConA1 = CondA1 (A);
 ConAInf = CondInf(A);
