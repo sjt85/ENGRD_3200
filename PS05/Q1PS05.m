@@ -6,6 +6,7 @@ logLPs = transpose(logLPs);
 X = [1 1 1 1 1 1 1 1 1 1 1; 0 0.8 5.8 23 53 102 150 207 287 333 408];
 X = transpose (X);
 Xt = transpose (X);
+G = Xt*X;
 a = inv(Xt*X) * Xt * logLPs;
 C = 800;
 LP = exp(5.525) * (exp(-0.0110))^800;
