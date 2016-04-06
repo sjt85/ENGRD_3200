@@ -15,18 +15,17 @@ scatter(x,y)             % Generate a scatter plot of the data points
 [a,ConNum,theta] = polylsq(x,y,nr,3);
 disp(theta)
 disp(a)
-%PredY = zeros(nr,1);
 Reala = [-11 55/3 -17/2 7/6];
-%for k = 1:1:nr
 PredY = polyval(flip(a),x);
-%end
 plot(x,PredY)            % Plot the least squares fit
 
 % Create a vector that stores the absolute error for each of the polynomial
 % fit coefficients with respect to the given coefficients
+if length(a) == length (Reala)
 AbsError = zeros(length(a),1);
 for j = 1:length(a)
     AbsError(j) = abs(a(j)-Reala(j));
+end
 end
 
 end
