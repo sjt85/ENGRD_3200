@@ -1,15 +1,10 @@
 function TEAM34PS05Q2
 % This function loads the daaset that represents what a tidal gauge
-% measures on a windy day and draws a scatter plot of the data with the
-% least-squares fit overlaid on top of the data
+% measures on a windy day and 
 %
 load ('noisier_tide')
 figure
 hold on
-box on
-xlabel ('Time')
-ylabel('Change in the Sea Level')
-title('Time vs. Change in the Sea Level')
 scatter(x,y)
 [nr,nc] = size(x);
 [a,ConNum] = polylsq(x,y,nr,3);

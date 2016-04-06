@@ -9,7 +9,7 @@ Xt = transpose (X);
 G = Xt*X;
 a = inv(Xt*X) * Xt * logLPs;
 C = 800;
-LP = exp(5.525) * (exp(-0.0110))^800;
+LP = exp(5.5285) * (exp(-0.0110))^800;
 disp(LP)
 figure
 semilogy(CDs,LPs)
@@ -25,7 +25,7 @@ title ('Semilog Y Plot of CDs vs LPs over an eleven year period')
 
 x = linspace (0,500,500);
 y = 5.528 + x * (-0.0110);
-y1 = exp(5.525) * (exp(-0.0110)).^x;
+y1 = exp(5.5285) * (exp(-0.0110)).^x;
 
 plot(x,y1)
 hold off
