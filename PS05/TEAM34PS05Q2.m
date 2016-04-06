@@ -2,7 +2,7 @@ function TEAM34PS05Q2
 % This function loads the daaset that represents what a tidal gauge
 % measures on a windy day and draws a scatter plot of the data with the
 % least-squares fit overlaid on top of the data
-%
+
 load ('noisier_tide')
 figure
 hold on
@@ -26,6 +26,7 @@ AbsError = zeros(length(a),1);
 for j = 1:length(a)
     AbsError(j) = abs(a(j)-Reala(j));
 end
+
 end
 
 function [a,ConNum] = polylsq(x,y,n,m)
