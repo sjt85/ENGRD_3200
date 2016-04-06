@@ -1,10 +1,15 @@
 function TEAM34PS05Q2
 % This function loads the daaset that represents what a tidal gauge
-% measures on a windy day and 
+% measures on a windy day and draws a scatter plot of the data with the
+% least-squares fit overlaid on top of the data
 %
 load ('noisier_tide')
 figure
 hold on
+box on
+xlabel ('Time')
+ylabel('Change in the Sea Level')
+title('Time vs. Change in the Sea Level')
 scatter(x,y)
 [nr,nc] = size(x);
 [a,ConNum] = polylsq(x,y,nr,3);
@@ -31,13 +36,13 @@ function [a,ConNum] = polylsq(x,y,n,m)
 bigX = ones (n,m+1);
 for k = 2:m+1
     for j = 1:n
-        bigX (j,k) = x(j)^(k-1);
+        bigX (j,k) = x(j)^(k-1); % Create the X matrix
     end
 end
 LHS = transpose(bigX) * bigX;
 RHS = transpose(bigX) * y;
-a = LHS \ RHS;
-ConNum = norm (LHS, Inf);
+a = LHS \ RHS;                   % Use the backslash command to find vector a 
+ConNum = norm (LHS, Inf);        % Condition Number of Gram's matrix
 
 end
 

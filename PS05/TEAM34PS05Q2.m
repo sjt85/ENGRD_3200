@@ -10,7 +10,7 @@ box on
 xlabel ('Time')
 ylabel('Change in the Sea Level')
 title('Time vs. Change in the Sea Level')
-scatter(x,y)
+scatter(x,y)             % Generate a scatter plot of the data points
 [nr,nc] = size(x);
 [a,ConNum] = polylsq(x,y,nr,3);
 PredY = zeros(nr,1);
@@ -18,7 +18,10 @@ Reala = [-11 55/3 -17/2 7/6];
 for k = 1:1:nr
 PredY(k) = a(1)+a(2)*x(k)+a(3)*x(k)^2+a(4)*x(k)^3;
 end
-plot(x,PredY)
+plot(x,PredY)            % Plot the least squares fit
+
+% Create a vector that stores the absolute error for each of the polynomial
+% fit coefficients with respect to the given coefficients
 AbsError = zeros(length(a),1);
 for j = 1:length(a)
     AbsError(j) = abs(a(j)-Reala(j));
@@ -36,13 +39,13 @@ function [a,ConNum] = polylsq(x,y,n,m)
 bigX = ones (n,m+1);
 for k = 2:m+1
     for j = 1:n
-        bigX (j,k) = x(j)^(k-1);
+        bigX (j,k) = x(j)^(k-1); % Create the X matrix
     end
 end
 LHS = transpose(bigX) * bigX;
 RHS = transpose(bigX) * y;
-a = LHS \ RHS;
-ConNum = norm (LHS, Inf);
+a = LHS \ RHS;                 % Use the backslash command to find vector a 
+ConNum = norm (LHS, Inf);      % Condition Number of Gram's matrix
 
 end
 
