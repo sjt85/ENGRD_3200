@@ -12,7 +12,9 @@ ylabel('Change in the Sea Level')
 title('Time vs. Change in the Sea Level')
 scatter(x,y)             % Generate a scatter plot of the data points
 [nr,nc] = size(x);
-[a,ConNum] = polylsq(x,y,nr,3);
+[a,ConNum,theta] = polylsq(x,y,nr,3);
+disp(theta)
+disp(a)
 PredY = zeros(nr,1);
 Reala = [-11 55/3 -17/2 7/6];
 for k = 1:1:nr

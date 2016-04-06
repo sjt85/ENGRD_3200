@@ -18,9 +18,7 @@ LHS = transpose(bigX) * bigX;
 RHS = transpose(bigX) * y;
 a = LHS \ RHS;                 % Use the backslash command to find vector a 
 ConNum = norm (LHS, Inf);      % Condition Number of Gram's matrix
-T = dot(bigX(:,m+1),bigX(:,m));
-B = (norm(bigX(:,m+1),2)* norm (bigX(:,m),2));
-theta = acos (T/B);
+theta = arccos (dot(bigX(:,m+1),bigX(;,m)/(norm(b
 end
 
 
