@@ -14,7 +14,7 @@ ylabel('Solar Radiation in Tucson, Arizona')
 title('Time vs. Solar Radiation')
 scatter(Days,Rad)   % Generate a scarrter plot of the data sets
 
-% Generate the matrix X
+% Generate the matrix X with first column all ones, second 
 X = ones (12,3);
 for j = 1:12
     X(j,2) = cos((1/360) * Days(j));
