@@ -23,7 +23,7 @@ Pred = a(1)+a(2)*cos(1/360*Time)+a(3)*sin(1/360*Time);
 
 % Augsix represents the number of days of Aug 6th
 Augsix = 7*30+6;
-PreRad = a(1)+a(2)*cos(1/360*Augsix)+a(3)*(1/360*Augsix);
+PreRad = a(1)+a(2)*cos(1/360*Augsix)+a(3)*sin(1/360*Augsix);
 fprintf('The predicted radiation on the 6th of August is %s W/m^2 \n',PreRad)
 
 close all
