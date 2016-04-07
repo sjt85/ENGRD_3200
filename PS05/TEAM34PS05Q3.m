@@ -17,7 +17,7 @@ end
 LHS = transpose(X) * X;
 RHS = transpose(X) * Rad;
 a = LHS \ RHS;            % Use the backslash to find vector a
-
+disp(a)
 Time = linspace(1,360,360);
 Pred = a(1)+a(2)*cos(1/360*Time)+a(3)*sin(1/360*Time);
 
