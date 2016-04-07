@@ -4,6 +4,8 @@ function TEAM34PS05Q2
 % least-squares fit overlaid on top of the data
 
 load ('noisier_tide')
+close all
+
 figure
 hold on
 box on
@@ -13,8 +15,7 @@ title('Time vs. Change in the Sea Level')
 scatter(x,y)             % Generate a scatter plot of the data points
 [nr,nc] = size(x);
 [a,ConNum,theta] = polylsq(x,y,nr,3);
-disp(theta)
-disp(a)
+fprintf('The angle theta between the last two columns is %s \n',theta)
 Reala = [-11 55/3 -17/2 7/6];
 PredY = polyval(flip(a),x);
 plot(x,PredY)            % Plot the least squares fit
