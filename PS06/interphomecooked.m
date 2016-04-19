@@ -30,6 +30,9 @@ for i = 0:n
     P = P + f(i+1) .* L_matrix(:,i+1);
 end
 
+
+%%% Plot everything %%%
+
 close all
 figure
 % Enlarge figure to full screen.
@@ -40,16 +43,26 @@ ah1 = subplot(3,1,1);
 plot(x_points,L_matrix(:,1),x_points,L_matrix(:,2),x_points,L_matrix(:,3))
 legend('L_{5,0}','L_{5,1}','L_{5,2}','Location','NorthEastOutside')
 ylabel({'Interpolant';'Functions'})
-
+for i = 1:6
+    line([xdata(i); xdata(i)],[4; -4],'Color','k','LineStyle','--');
+end
+    
+    
 ah2 = subplot(3,1,2);
-plot(x_points,L_matrix(:,4),x_points,L_matrix(:,5),x_points,L_matrix(:,6))
+plot(x_points,L_matrix(:,4),'g',x_points,L_matrix(:,5),'c',x_points,L_matrix(:,6),'m')
 legend('L_{5,3}','L_{5,4}','L_{5,5}','Location','NorthEastOutside')
 ylabel({'Interpolant';'Functions'})
+for i = 1:6
+    line([xdata(i); xdata(i)],[2; -3],'Color','k','LineStyle','--');
+end
 
 ah3 = subplot(3,1,3);
 hold on
 plot(x_points,P)
 scatter(xdata,f)
+for i = 1:6
+    line([xdata(i); xdata(i)],[1; .6],'Color','k','LineStyle','--');
+end
 box on
 hold off
 legend('P_5','Tabulated values','Location','NorthEastOutside')
@@ -71,6 +84,7 @@ set(ah2,'Position',pos2)
 set(ah1,'XTickLabel','')
 set(ah2,'XTickLabel','')
 
+    
 
 
 end

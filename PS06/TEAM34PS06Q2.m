@@ -1,6 +1,6 @@
 function [fout] = TEAM34PS06Q2
 % Sets up the problem
-% Calls subroutine to compute the lagrange IP
+% Calls subroutine to compute the lagrange IP and plot everything
 
 
 xdata = [5.88; 12.3; 27.3; 45.8; 69.6; 100];  %phi
