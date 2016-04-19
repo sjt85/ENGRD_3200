@@ -8,7 +8,11 @@ f_i = [0.995; 0.98; 0.92; 0.83; 0.726; 0.617]; %c_p
 n = 5;
 xout = linspace(10,100,19);
 
-fout = interphomecooked(xdata,f_i,n,xout);
+c_p = interphomecooked(xdata,f_i,n,xout);
+fout = zeros(2,length(xout));
+fout(1,:) = transpose(xout);
+fout(2,:) = transpose(c_p);
+
 
 
 end

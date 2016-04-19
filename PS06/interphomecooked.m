@@ -6,7 +6,6 @@ function fout = interphomecooked(xdata,f,n,xout)
 % Plots the global interpolating polynomial along with original data
 % Performs a second run, sampling at xout and returns xdata
 
-fout = 1;
 
 % Set up spacing for use with the plots to have 200 points
 x_points = linspace(xdata(1),xdata(length(xdata)),200);
@@ -85,6 +84,22 @@ set(ah1,'XTickLabel','')
 set(ah2,'XTickLabel','')
 
     
+%%% Now go back and find the requested values %%%
+
+L_matrix = zeros(length(xout),n+1);
+
+for j = 0:n    % Evaluate one L_n,i at a time
+   for k = 1:length(xout)
+       L_matrix(k,j+1) = Lagrange(xdata,xout(k),j,n);
+   end
+end
+
+
+% Construct the final polynomial
+fout = zeros(length(xout),1);
+for i = 0:n
+    fout = fout + f(i+1) .* L_matrix(:,i+1);
+end
 
 
 end
