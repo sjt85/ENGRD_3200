@@ -29,61 +29,76 @@ for i = 0:n
     P = P + f(i+1) .* L_matrix(:,i+1);
 end
 
-
-%%% Plot everything %%%
-
 close all
 figure
-% Enlarge figure to full screen.
-set(gcf, 'Units', 'Normalized', 'OuterPosition', [0 0 1 1]);
-
-
-ah1 = subplot(3,1,1);
-plot(x_points,L_matrix(:,1),x_points,L_matrix(:,2),x_points,L_matrix(:,3))
-legend('L_{5,0}','L_{5,1}','L_{5,2}','Location','NorthEastOutside')
-ylabel({'Interpolant';'Functions'})
-for i = 1:6
-    line([xdata(i); xdata(i)],[4; -4],'Color','k','LineStyle','--');
-end
-    
-    
-ah2 = subplot(3,1,2);
-plot(x_points,L_matrix(:,4),'g',x_points,L_matrix(:,5),'c',x_points,L_matrix(:,6),'m')
-legend('L_{5,3}','L_{5,4}','L_{5,5}','Location','NorthEastOutside')
-ylabel({'Interpolant';'Functions'})
-for i = 1:6
-    line([xdata(i); xdata(i)],[2; -3],'Color','k','LineStyle','--');
-end
-
-ah3 = subplot(3,1,3);
 hold on
 plot(x_points,P)
 scatter(xdata,f)
-for i = 1:6
-    line([xdata(i); xdata(i)],[1; .6],'Color','k','LineStyle','--');
-end
+xlabel('Time')
+ylabel('Temperature [^0F]')
+axis([0 12 20 160]);
+ax = gca;
+ax.XTick = [0 xdata 12];
+ax.XTickLabel = {'','1pm','2pm','3pm','4pm','5pm','6pm','7pm','8pm','9pm','10pm','11pm',''};
 box on
 hold off
-legend('P_5','Tabulated values','Location','NorthEastOutside')
-xlabel('Mole Percentage \phi [%]')
-ylabel({'Heat Capacity';'c_p [cal/g ^oC]'})
 
-% find current position [x,y,width,height]
-pos3 = get(ah3,'Position');
-pos2 = get(ah2,'Position');
-pos1 = get(ah1,'Position');
 
-% set width of second axes equal to first
-pos1(3) = pos3(3);
-pos2(3) = pos3(3);
-set(ah1,'Position',pos1)
-set(ah2,'Position',pos2)
 
-% turn off axes
-set(ah1,'XTickLabel','')
-set(ah2,'XTickLabel','')
+%%% Plot everything %%%
 
-    
+% close all
+% figure
+% % Enlarge figure to full screen.
+% set(gcf, 'Units', 'Normalized', 'OuterPosition', [0 0 1 1]);
+% 
+% 
+% ah1 = subplot(3,1,1);
+% plot(x_points,L_matrix(:,1),x_points,L_matrix(:,2),x_points,L_matrix(:,3))
+% legend('L_{5,0}','L_{5,1}','L_{5,2}','Location','NorthEastOutside')
+% ylabel({'Interpolant';'Functions'})
+% for i = 1:6
+%     line([xdata(i); xdata(i)],[4; -4],'Color','k','LineStyle','--');
+% end
+%     
+%     
+% ah2 = subplot(3,1,2);
+% plot(x_points,L_matrix(:,4),'g',x_points,L_matrix(:,5),'c',x_points,L_matrix(:,6),'m')
+% legend('L_{5,3}','L_{5,4}','L_{5,5}','Location','NorthEastOutside')
+% ylabel({'Interpolant';'Functions'})
+% for i = 1:6
+%     line([xdata(i); xdata(i)],[2; -3],'Color','k','LineStyle','--');
+% end
+% 
+% ah3 = subplot(3,1,3);
+% hold on
+% plot(x_points,P)
+% scatter(xdata,f)
+% for i = 1:6
+%     line([xdata(i); xdata(i)],[1; .6],'Color','k','LineStyle','--');
+% end
+% box on
+% hold off
+% legend('P_5','Tabulated values','Location','NorthEastOutside')
+% xlabel('Mole Percentage \phi [%]')
+% ylabel({'Heat Capacity';'c_p [cal/g ^oC]'})
+% 
+% % find current position [x,y,width,height]
+% pos3 = get(ah3,'Position');
+% pos2 = get(ah2,'Position');
+% pos1 = get(ah1,'Position');
+% 
+% % set width of second axes equal to first
+% pos1(3) = pos3(3);
+% pos2(3) = pos3(3);
+% set(ah1,'Position',pos1)
+% set(ah2,'Position',pos2)
+% 
+% % turn off axes
+% set(ah1,'XTickLabel','')
+% set(ah2,'XTickLabel','')
+% 
+%     
 %%% Now go back and find the requested values %%%
 
 L_matrix = zeros(length(xout),n+1);
