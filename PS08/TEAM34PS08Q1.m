@@ -35,10 +35,13 @@ booles(:,3) = abs(2-booles(:,2));
 
 close all
 figure
+loglog(trap(:,1),trap(:,3),'o')
 hold on
-scatter(trap(:,1),trap(:,3))
-scatter(simp(:,1),simp(:,3))
-scatter(booles(:,1),booles(:,3))
+loglog(simp(:,1),simp(:,3),'o')
+loglog(booles(:,1),booles(:,3),'o')
+legend('Trapezoidal','Simpsons','Booles')
+xlabel('Integration Segment Length')
+ylabel('Absolute Error')
 hold off
 
 
