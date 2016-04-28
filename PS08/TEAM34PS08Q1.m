@@ -1,4 +1,4 @@
-function [trap,simp,booles] = TEAM34PS08Q1()
+function [b_trap,b_simp,b_booles] = TEAM34PS08Q1()
 
 % Numerically integrates sin(x) from [0,pi]
 % Computes for composite trapezoidal rule, Simpson's 1/3 rule, and Boole's
@@ -25,8 +25,8 @@ for N = 20 : 4 : 152    % Evaluate integral at each N value
 end
 
 trap(:,1) = pi ./ sub_ints(:,1);
-simp(:,1) = pi ./ (2*sub_ints(:,1));   % Spacing
-booles(:,1) = pi ./ (2*sub_ints(:,1));
+simp(:,1) = pi ./ (2.*sub_ints(:,1));   % Spacing
+booles(:,1) = pi ./ (4.*sub_ints(:,1));
 
 trap(:,3) = abs(2-trap(:,2));
 simp(:,3) = abs(2-simp(:,2));         % Error
@@ -53,20 +53,19 @@ trapfit = polyfit(traplog(:,1),traplog(:,2),1);
 simpfit = polyfit(simplog(:,1),simplog(:,2),1);
 boolesfit = polyfit(booleslog(:,1),booleslog(:,2),1);
 
-% Back substitute
-
-trapfitnew = [exp(trapfit(1)), trapfit(2)];
-simpfitnew = [exp(simpfit(1)), simpfit(2)];
-boolesfitnew = [exp(boolesfit(1)), boolesfit(2)];
 
 % Evaluate least squares polynomials
 
-%trapvals = trapfitnew(2).*trap(:,1).^trapfitnew(1);
-trapvals = exp(trapfit(2)).*trap(:,1).^trapfit(1);
+b_trap = trapfit(1);
+trapvals = exp(trapfit(2)).*trap(:,1).^b_trap;
 
-%trapvals = polyval(trapfitnew,trap(:,1));
-%simpvals = polyval(simpfitnew,simp(:,1));
-%boolesvals = polyval(boolesfitnew,booles(:,1));
+b_simp = simpfit(1);
+simpvals = exp(simpfit(2)).*simp(:,1).^b_simp;
+
+b_booles = boolesfit(1);
+boolesvals = exp(boolesfit(2)).*booles(:,1).^b_booles;
+
+
 
 
 
@@ -75,15 +74,18 @@ close all
 figure
 loglog(trap(:,1),trap(:,3),'o')
 hold on
+box on
+grid on
+
 loglog(simp(:,1),simp(:,3),'o')
-loglog(booles(:,1),booles(:,3),'o')
+loglog(booles(:,1),booles(:,3),'og')
 
 %plot least squares too
-plot(trap(:,1),trapvals)
-%plot(simp(:,1),simpvals)
-%plot(booles(:,1),boolesvals)
+plot(trap(:,1),trapvals,'b')
+plot(simp(:,1),simpvals,'r')
+plot(booles(:,1),boolesvals,'g')
 
-%legend('Trapezoidal','Simpsons','Booles')
+legend('Trapezoidal','Simpsons','Booles')
 xlabel('Integration Segment Length')
 ylabel('Absolute Error')
 hold off
