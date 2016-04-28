@@ -18,15 +18,17 @@ sub_ints = zeros(34,1);
 for N = 20 : 4 : 152    % Evaluate integral at each N value
     i = i + 1;
     sub_ints(i,1) = N;    % Number of subintervals
-    steps = linspace(0,pi,N);
-    trap(i,2) = trapz(steps,sin(steps));
-    simp(i,2) = Simpson(@sin,steps);
-    booles(i,2) = Boole(@sin,steps);
+    steps_t = linspace(0,pi,N);
+    steps_s = linspace(0,pi,2*N);
+    steps_b = linspace(0,pi,4*N);
+    trap(i,2) = trapz(steps_t,sin(steps_t));
+    simp(i,2) = Simpson(@sin,steps_s);
+    booles(i,2) = Boole(@sin,steps_b);
 end
 
 trap(:,1) = pi ./ sub_ints(:,1);
-simp(:,1) = pi ./ (2.*sub_ints(:,1));   % Spacing
-booles(:,1) = pi ./ (4.*sub_ints(:,1));
+simp(:,1) = pi ./ (sub_ints(:,1));   % Spacing
+booles(:,1) = pi ./ (sub_ints(:,1));
 
 trap(:,3) = abs(2-trap(:,2));
 simp(:,3) = abs(2-simp(:,2));         % Error
