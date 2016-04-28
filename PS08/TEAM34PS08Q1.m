@@ -1,4 +1,4 @@
-function [simp,booles] = TEAM34PS08Q1()
+function [trap,simp,booles] = TEAM34PS08Q1()
 
 % Numerically integrates sin(x) from [0,pi]
 % Computes for composite trapezoidal rule, Simpson's 1/3 rule, and Boole's
@@ -8,10 +8,39 @@ function [simp,booles] = TEAM34PS08Q1()
 
 
 % Call with @sin
-steps = linspace(0,pi,1000);
-simp = Simpson(@sin,steps);
 
-booles = Boole(@sin,steps);
+i = 0;  % Iteration counter for setting up plotting
+trap = zeros(33,3);  % Column 1 is spacing, 2 is value, 3 is error
+simp = trap;
+booles = trap;
+sub_ints = zeros(33,1);
+
+for N = 20 : 4 : 152    % Evaluate integral at each N value
+    i = i + 1;
+    sub_ints(i,1) = N;    % Number of subintervals
+    steps = linspace(0,pi,N);
+    trap(i,2) = trapz(steps,sin(steps));
+    simp(i,2) = Simpson(@sin,steps);
+    booles(i,2) = Boole(@sin,steps);
+end
+
+trap(:,1) = pi ./ sub_ints(:,1);
+simp(:,1) = pi ./ (2*sub_ints(:,1));   % Spacing
+booles(:,1) = pi ./ (2*sub_ints(:,1));
+
+trap(:,3) = abs(2-trap(:,2));
+simp(:,3) = abs(2-simp(:,2));         % Error
+booles(:,3) = abs(2-booles(:,2));
+
+
+close all
+figure
+hold on
+scatter(trap(:,1),trap(:,3))
+scatter(simp(:,1),simp(:,3))
+scatter(booles(:,1),booles(:,3))
+hold off
+
 
 
 
