@@ -47,9 +47,6 @@ for n = 20:4:160
         % Use two-point forumual to find the current estimate
         pt2Curr = pt2c0*newfx(pt2x0)+ pt2c1*newfx(pt2x1);
         
-        % Add up the estimation value for each subinterval
-        pt2Est(index) = pt2Est(index) + pt2Curr;
-        
         % Use four-point formula to find the current estimate
         pt4Curr = pt4c0*newfx(pt4x0) + pt4c1*newfx(pt4x1)+...
             pt4c2*newfx(pt4x2) + pt4c3*newfx(pt4x3);
@@ -59,6 +56,7 @@ for n = 20:4:160
         pt4Est(index) = pt4Est(index) + pt4Curr;
     end
 end
+
 
 end
 
