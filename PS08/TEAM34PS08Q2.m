@@ -56,6 +56,31 @@ for n = 20:4:160
         pt4Est(index) = pt4Est(index) + pt4Curr;
     end
 end
+% Find the absolute error for two-point and four-point estimation
+pt2Error = abs(pi/4 - pt2Est);
+pt4Error = abs(pi/4 - pt4Est);
 
+pt2xlabel = linspace(20,160,36)*2;
+pt4xlabel = linspace(20,160,36)*4;
+
+figure
+loglog(pt2xlabel,pt2Error)
+hold on
+box on
+grid on
+xlabel ('The Total Number of Intergration Points')
+ylabel ('The Absolute Value of the True Error')
+title ('Loglog plot of n=2 points')
+hold off
+
+figure
+loglog(pt4xlabel,pt4Error)
+hold on
+box on
+grid on
+xlabel ('The Total Number of Intergration Points')
+ylabel ('The Absolute Value of the True Error')
+title('Loglog plot of n=4 points')
+hold off
 end
 
