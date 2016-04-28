@@ -56,6 +56,10 @@ for n = 20:4:160
         pt4Est(index) = pt4Est(index) + pt4Curr;
     end
 end
+pt2Error = abs(pi/4 - pt2Est);
+pt4Error = abs(pi/4 - pt4Est);
+pt2xlabel = linspace(20,160
+
 
 end
 
