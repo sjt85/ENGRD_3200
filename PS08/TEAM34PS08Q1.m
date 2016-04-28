@@ -10,10 +10,10 @@ function [trap,simp,booles] = TEAM34PS08Q1()
 % Call with @sin
 
 i = 0;  % Iteration counter for setting up plotting
-trap = zeros(33,3);  % Column 1 is spacing, 2 is value, 3 is error
+trap = zeros(34,3);  % Column 1 is spacing, 2 is value, 3 is error
 simp = trap;
 booles = trap;
-sub_ints = zeros(33,1);
+sub_ints = zeros(34,1);
 
 for N = 20 : 4 : 152    % Evaluate integral at each N value
     i = i + 1;
@@ -33,13 +33,57 @@ simp(:,3) = abs(2-simp(:,2));         % Error
 booles(:,3) = abs(2-booles(:,2));
 
 
+% To get least squares fits, take log of both sides
+
+traplog = zeros(34,2);
+traplog(:,1) = log(trap(:,1));
+traplog(:,2) = log(trap(:,3));
+
+simplog = zeros(34,2);
+simplog(:,1) = log(simp(:,1));
+simplog(:,2) = log(simp(:,3));
+
+booleslog = zeros(34,2);
+booleslog(:,1) = log(booles(:,1));
+booleslog(:,2) = log(booles(:,3));
+
+% Now perform least squares on transformed variables
+
+trapfit = polyfit(traplog(:,1),traplog(:,2),1);
+simpfit = polyfit(simplog(:,1),simplog(:,2),1);
+boolesfit = polyfit(booleslog(:,1),booleslog(:,2),1);
+
+% Back substitute
+
+trapfitnew = [exp(trapfit(1)), trapfit(2)];
+simpfitnew = [exp(simpfit(1)), simpfit(2)];
+boolesfitnew = [exp(boolesfit(1)), boolesfit(2)];
+
+% Evaluate least squares polynomials
+
+%trapvals = trapfitnew(2).*trap(:,1).^trapfitnew(1);
+trapvals = exp(trapfit(2)).*trap(:,1).^trapfit(1);
+
+%trapvals = polyval(trapfitnew,trap(:,1));
+%simpvals = polyval(simpfitnew,simp(:,1));
+%boolesvals = polyval(boolesfitnew,booles(:,1));
+
+
+
+
 close all
 figure
 loglog(trap(:,1),trap(:,3),'o')
 hold on
 loglog(simp(:,1),simp(:,3),'o')
 loglog(booles(:,1),booles(:,3),'o')
-legend('Trapezoidal','Simpsons','Booles')
+
+%plot least squares too
+plot(trap(:,1),trapvals)
+%plot(simp(:,1),simpvals)
+%plot(booles(:,1),boolesvals)
+
+%legend('Trapezoidal','Simpsons','Booles')
 xlabel('Integration Segment Length')
 ylabel('Absolute Error')
 hold off
