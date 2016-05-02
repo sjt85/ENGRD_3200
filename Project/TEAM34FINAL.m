@@ -10,8 +10,14 @@ function [ ] = TEAM34FINAL( )
 
 % Perform least squares fit on experimental spring and dashpot data
 
+% Bring in experimental data
+load('springforce.mat')
+load('dampingforce.mat')
 
+% Perform fit from function in PS05
+[k,ConNum_k,theta_k] = polylsq(Fsp(2,:),Fsp(1,:),11,3);  %Cubic fit
 
+[c,ConNum_c,theta_c] = polylsq(Fd(2,:),Fd(1,:),11,2);    %Quadratic fit
 
 
 end
