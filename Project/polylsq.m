@@ -8,18 +8,18 @@ function [a,ConNum,theta] = polylsq(x,y,n,m)
 % output ConNum is the condition number of Gram's matrix
 % output theta is the generalized angle between the (k-1)th and kth column
 % of matrix X
-bigX = ones (n,m+1);
-for k = 2:m+1
+bigX = ones (n,m);
+for k = 1:m
     for j = 1:n
-        bigX (j,k) = x(j)^(k-1); % Create the X matrix
+        bigX (j,k) = x(j)^(k); % Create the X matrix
     end
 end
 LHS = transpose(bigX) * bigX;
 RHS = transpose(bigX) * y;
 a = LHS \ RHS;                 % Use the backslash command to find vector a 
 ConNum = norm (LHS, Inf);      % Condition Number of Gram's matrix
-T = dot(bigX(:,m+1),bigX(:,m));
-B = (norm(bigX(:,m+1),2)* norm (bigX(:,m),2));
+T = dot(bigX(:,m),bigX(:,m));
+B = (norm(bigX(:,m),2)* norm (bigX(:,m),2));
 theta = acos (T/B);
 end
 
