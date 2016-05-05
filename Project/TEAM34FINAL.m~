@@ -47,8 +47,6 @@ xlabel('Damper Velocity [m/s]')
 ylabel('Damping Force [N]')
 hold off
 
-%%% 
-[t y1 y2 y3 y4] = rk4sys(@dydtsys,[0,100],
 end
 
 function xdot = dydtsys(x,t)
