@@ -47,6 +47,4 @@ xlabel('Damper Velocity [m/s]')
 ylabel('Damping Force [N]')
 hold off
 
-
-
 end
