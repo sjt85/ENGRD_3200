@@ -1,4 +1,4 @@
-function [ ] = TEAM34FINAL( )
+function [ t,y] = TEAM34FINAL( )
 % Master function for ENGRD 3200 Final Project
 % Is broken into 3 parts:
 %   1)  Quarter Car Model
@@ -60,7 +60,7 @@ disp(t)
 disp(y)
 end
 
-function xdot = dydtsys(x,t)
+function xdot = dydtsys(t,x)
 %You cannot change function name
 %
 ms = 236.12;
@@ -78,8 +78,8 @@ else
     q = 0.1 * sin(pi/(5.2/V*1000/3600)*t);
 end
 deltax = x(3)-x(1);
-Fsp = 0.0124 * delatx -0.0737 * deltax^2 + 3.1704 * deltax^3;
-Fd = 905.2896 * delta + 254.2550 * delta^2;
+Fsp = 0.0124 * deltax -0.0737 * deltax^2 + 3.1704 * deltax^3;
+Fd = 905.2896 * deltax + 254.2550 * deltax^2;
 
 xdot(1,1)=x(2);
 xdot(2,1)=-1/ms*(Fsp+Fd);
