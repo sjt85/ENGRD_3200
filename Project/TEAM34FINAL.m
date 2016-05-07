@@ -62,7 +62,7 @@ end
 
 function xdot = dydtsys(t,x)
 %You cannot change function name
-%
+% Hard coding constants
 ms = 236.12;
 mu = 23.61;
 kt = 181818.88;
@@ -70,12 +70,14 @@ ct = 13.854;
 V = 40;
 L = 5.2;
 T = L/(V*1000/3600);
+omega = pi/T;
+A = 0.1;
 if t>T;
     qdot = 0;
     q = 0;
 else
-    qdot= 0.1 * pi/(5.2/V*1000/3600)* cos(pi/(5.2/V*1000/3600)*t);
-    q = 0.1 * sin(pi/(5.2/V*1000/3600)*t);
+    qdot= A*omega*cos(omega*t);
+    q = A*sin(omega*t);
 end
 deltax = x(3)-x(1);
 Fsp = 0.0124 * deltax -0.0737 * deltax^2 + 3.1704 * deltax^3;
