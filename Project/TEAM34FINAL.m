@@ -1,4 +1,4 @@
-function [ t,y,ode] = TEAM34FINAL( )
+function [ t,y] = TEAM34FINAL( )
 % Master function for ENGRD 3200 Final Project
 % Is broken into 3 parts:
 %   1)  Quarter Car Model
@@ -84,8 +84,9 @@ else
     q = A*sin(omega*t);
 end
 deltax = x(1)-x(3);
+deltax_dot = x(2)-x(4);
 Fsp = k(1) * deltax + k(2) * deltax^2 + k(3) * deltax^3;
-Fd = c(1) * deltax + c(2) * deltax^2;
+Fd = c(1) * deltax_dot + c(2) * deltax_dot^2;
 
 xdot(1,1)=x(2);
 xdot(2,1)=-1/ms*(Fsp+Fd);
