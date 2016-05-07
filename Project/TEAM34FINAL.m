@@ -50,7 +50,14 @@ legend('Original Data','Least Squares Quadratic Fit','Location','NorthWest')
 hold off
 
 %%%
-[t y1 y2 y3 y4] = rk4sys(@dydtsys,[0,100],
+x = [0; 0; 0; 0];
+V = 40;
+L = 5.2;
+T = L / (V*1000/3600);
+h = T / 100;
+[t ,y] = rk4sys(@dydtsys,[0,5*T],x,h);
+disp(t)
+disp(y)
 end
 
 function xdot = dydtsys(x,t)
@@ -61,7 +68,8 @@ mu = 23.61;
 kt = 181818.88;
 ct = 13.854;
 V = 40;
-% % %  T = 
+L = 5.2;
+T = L/(V*1000/3600);
 if t>T;
     qdot = 0;
     q = 0;
@@ -69,8 +77,9 @@ else
     qdot= 0.1 * pi/(5.2/V*1000/3600)* cos(pi/(5.2/V*1000/3600)*t);
     q = 0.1 * sin(pi/(5.2/V*1000/3600)*t);
 end
-Fsp = 0.0124 * ((x(3)-x(1)) + (-0.0737) * ((x(3)-x(1))^2 + 3.1704 * ((x(3)-x(1))^3;
-Fd = 905.2896 * ((x(3)-x(1)) + 254.2550 * ((x(3)-x(1))^2;
+deltax = x(3)-x(1);
+Fsp = 0.0124 * delatx -0.0737 * deltax^2 + 3.1704 * deltax^3;
+Fd = 905.2896 * delta + 254.2550 * delta^2;
 
 xdot(1,1)=x(2);
 xdot(2,1)=-1/ms*(Fsp+Fd);
