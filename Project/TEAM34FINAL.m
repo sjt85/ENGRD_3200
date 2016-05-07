@@ -49,4 +49,32 @@ ylabel('Damping Force [N]')
 legend('Original Data','Least Squares Quadratic Fit','Location','NorthWest')
 hold off
 
+%%%
+[t y1 y2 y3 y4] = rk4sys(@dydtsys,[0,100],
+end
+
+function xdot = dydtsys(x,t)
+%You cannot change function name
+%
+ms = 236.12;
+mu = 23.61;
+kt = 181818.88;
+ct = 13.854;
+V = 40;
+% % %  T = 
+if t>T;
+    qdot = 0;
+    q = 0;
+else
+    qdot= 0.1 * pi/(5.2/V*1000/3600)* cos(pi/(5.2/V*1000/3600)*t);
+    q = 0.1 * sin(pi/(5.2/V*1000/3600)*t);
+end
+Fsp = 0.0124 * ((x(3)-x(1)) + (-0.0737) * ((x(3)-x(1))^2 + 3.1704 * ((x(3)-x(1))^3;
+Fd = 905.2896 * ((x(3)-x(1)) + 254.2550 * ((x(3)-x(1))^2;
+
+xdot(1,1)=x(2);
+xdot(2,1)=-1/ms*(Fsp+Fd);
+xdot(3,1)=x(3);
+xdot(4,1)=(1/mu)*(kt*(q-x(1))+ct*(qdot-x(2))+Fsp+Fd);
+
 end
