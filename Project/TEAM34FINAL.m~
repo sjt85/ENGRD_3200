@@ -83,14 +83,14 @@ else
     qdot= A*omega*cos(omega*t);
     q = A*sin(omega*t);
 end
-deltax = x(1)-x(3);
+deltax = x(3)-x(1);
 Fsp = k(1) * deltax + k(2) * deltax^2 + k(3) * deltax^3;
 Fd = c(1) * deltax + c(2) * deltax^2;
 
 xdot(1,1)=x(2);
 xdot(2,1)=-1/ms*(Fsp+Fd);
-xdot(3,1)=x(4);
-xdot(4,1)=(1/mu)*(kt*(q-x(3))+ct*(qdot-x(4))+Fsp+Fd);
+xdot(3,1)=x(3);
+xdot(4,1)=(1/mu)*(kt*(q-x(1))+ct*(qdot-x(2))+Fsp+Fd);
 
 
 end
