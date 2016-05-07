@@ -14,6 +14,10 @@ function [ t,y] = TEAM34FINAL( )
 load('springforce.mat')
 load('dampingforce.mat')
 
+% Make spring and damper constants global so we can see them later
+global k
+global c
+
 % Perform fit from function in PS05
 % Polylsq was modified to force the curves to pass through (0,0)
 [k,ConNum_k,theta_k] = polylsq(Fsp(2,:)',Fsp(1,:)',11,3);  %Cubic fit
@@ -63,6 +67,8 @@ end
 function xdot = dydtsys(t,x)
 %You cannot change function name
 % Hard coding constants
+global k
+global c
 ms = 236.12;
 mu = 23.61;
 kt = 181818.88;
@@ -80,8 +86,8 @@ else
     q = A*sin(omega*t);
 end
 deltax = x(3)-x(1);
-Fsp = 0.0124 * deltax -0.0737 * deltax^2 + 3.1704 * deltax^3;
-Fd = 905.2896 * deltax + 254.2550 * deltax^2;
+Fsp = k(1) * deltax + k(2) * deltax^2 + k(3) * deltax^3;
+Fd = c(1) * deltax + c(2) * deltax^2;
 
 xdot(1,1)=x(2);
 xdot(2,1)=-1/ms*(Fsp+Fd);
