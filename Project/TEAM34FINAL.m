@@ -15,6 +15,7 @@ load('springforce.mat')
 load('dampingforce.mat')
 
 % Make spring and damper constants global so we can see them later
+
 global k
 global c
 
@@ -54,14 +55,38 @@ legend('Original Data','Least Squares Quadratic Fit','Location','NorthWest')
 hold off
 
 % Vector x stores the initial conditions for Xu, Vu, Xs, Vs
-x = [0 0 0 0];
-V = 40;                      % V is the velocity
-L = 5.2;
-T = L / (V*1000/3600);       % T is the period of the sine wave
-h = T / 100;                 % h is the step size
+x = [0 0 0 0];                     % V is the velocity
+L = 5.2;  
+V = [40];              % Velocity of the car
+L = 5.2;               % Length
+T = L/(V*1000/3600);
+omega = pi/T;
 
+% Run the simulation with two different step size h0, and h1
+h0 = T / 100;
+h1 = T / 50;                
 % Call the fourth-order Runge-Kutta function to solve a system of ODEs
-[t,y] = rk4sys(@dydtsys,[0,5*T],x,h);
+[t0,y0] = rk4sys(@dydtsys,[0,5*T(1)],x,h0);
+[t1,y1] = rk4sys(@dydtsys,[0,5*T(1)],x,h1);
+
+hold on
+figure(3)
+box on
+plot(t0,y0(:,1),'r',t1,y1(:,1))
+xlabel('Time [s]')
+ylabel('Displacement of Sprung Mass [m]')
+legend('Step Size T/100','Step Size T/50','Location','NorthEast')
+hold off
+
+hold on
+figure(4)
+box on
+plot(t0,y0(:,3),'r',t1,y1(:,3))
+xlabel('Time [s]')
+ylabel('Displacement of Unsprung Mass [m]')
+legend('Step Size T/100','Step Size T/50','Location','NorthEast')
+hold off
+
 
 % Perform first order linear fit on experimental spring and dashpot data
 % in order to do the Laplace Transformation
@@ -72,10 +97,8 @@ h = T / 100;                 % h is the step size
 knew_vals = knew(1) .* k_pts;
 cnew_vals = cnew(1) .* c_pts;
 
-disp(knew)
-disp(cnew)
 
-figure(3)
+figure(5)
 hold on
 scatter(Fsp(2,:),Fsp(1,:))
 plot(k_pts,knew_vals)
@@ -85,7 +108,7 @@ ylabel('Spring Force [N]')
 legend('Original Data','First Order Linear Fit','Location','NorthWest')
 hold off
 
-figure(4)
+figure(6)
 hold on
 scatter(Fd(2,:),Fd(1,:))
 plot(c_pts,cnew_vals)
@@ -94,7 +117,7 @@ xlabel('Damper Velocity [m/s]')
 ylabel('Damping Force [N]')
 legend('Original Data','First Order Linear Fit','Location','NorthWest')
 hold off
-end
+ end
 
 function xdot = dydtsys(t,x)
 % The function dydtsys is used to hold the ODEs
