@@ -21,7 +21,7 @@ omega = pi/T;
 A = 0.1;
 
 % QCM experiences the road profile q when 0<t<T
-if 0>t>T;
+if 0>t || t>T;
     qdot = 0;
     q = 0;
 else
