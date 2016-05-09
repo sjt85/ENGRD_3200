@@ -1,4 +1,4 @@
-function [ t,y] = TEAM34FINAL( )
+function [ ] = TEAM34FINAL( )
 % Master function for ENGRD 3200 Final Project
 % Is broken into 3 parts:
 %   1)  Quarter Car Model
@@ -62,6 +62,38 @@ h = T / 100;
 
 % Call the fourth-order Runge-Kutta function to solve a system of ODEs
 [t,y] = rk4sys(@dydtsys,[0,5*T],x,h);
+
+% Perform first order linear fit on experimental spring and dashpot data
+% in order to do the Laplace Transformation
+[knew,ConNum_k,theta_k] = polylsq(Fsp(2,:)',Fsp(1,:)',11,1); % linear fit
+
+[cnew,ConNum_c,theta_c] = polylsq(Fd(2,:)',Fd(1,:)',11,1);  %Linear fit
+
+knew_vals = knew(1) .* k_pts;
+cnew_vals = cnew(1) .* c_pts;
+
+disp(knew)
+disp(cnew)
+
+figure(3)
+hold on
+scatter(Fsp(2,:),Fsp(1,:))
+plot(k_pts,knew_vals)
+box on
+xlabel('Spring Displacement [m]')
+ylabel('Spring Force [N]')
+legend('Original Data','First Order Linear Fit','Location','NorthWest')
+hold off
+
+figure(4)
+hold on
+scatter(Fd(2,:),Fd(1,:))
+plot(c_pts,cnew_vals)
+box on
+xlabel('Damper Velocity [m/s]')
+ylabel('Damping Force [N]')
+legend('Original Data','First Order Linear Fit','Location','NorthWest')
+hold off
 end
 
 function xdot = dydtsys(t,x)
