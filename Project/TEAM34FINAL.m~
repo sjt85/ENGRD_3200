@@ -55,10 +55,10 @@ hold off
 
 % Vector x stores the initial conditions for Xu, Vu, Xs, Vs
 x = [0 0 0 0];
-V = 40;                      % V is the velocity
+V = 40;
 L = 5.2;
-T = L / (V*1000/3600);       % T is the period of the sine wave
-h = T / 100;                 % h is the step size
+T = L / (V*1000/3600);
+h = T / 100;
 
 % Call the fourth-order Runge-Kutta function to solve a system of ODEs
 [t,y] = rk4sys(@dydtsys,[0,5*T],x,h);
@@ -98,10 +98,7 @@ end
 
 function xdot = dydtsys(t,x)
 % The function dydtsys is used to hold the ODEs
-% t is the current time (a single number).
-% x is a four element vector;
-% x = [xs, vs, xu, vu]
-% xdot is dxdt of each of these four variables
+% t is the current time (a single numrepresents the time
 
 % Hard coding constants
 global k
