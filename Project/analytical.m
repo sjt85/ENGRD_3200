@@ -67,7 +67,8 @@ Xtf = tf([-ct*cs, cs*kt-ct*ks, kt*ks],[ms*mu, cs*ms-ct*ms+cs*mu, ...
     ks*ms+kt*ms+ks*mu-cs*ct, cs*kt-ct*ks, ks*kt]);
 
 t_vect = linspace(0,0.468*5,300);
-q_vect = 0.1*sin(6.7128.*t_vect);
+q_vect = zeros(1,length(t_vect));
+q_vect(1,1:60) = 0.1*sin(6.7128.*t_vect(1,1:60));
 [xs_final, t_final] = lsim(Xtf,q_vect,t_vect);
 
 plot(t_final,xs_final)
