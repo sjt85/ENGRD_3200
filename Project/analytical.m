@@ -1,4 +1,9 @@
-% Experimenting with laplace transforms
+% Laplace transform verification script
+%   Uses the symbolic math toolbox to derive laplace transforms for Xs, Xu,
+%   and Q
+%   Then uses the control systems toolbox to perform a simulation using
+%   transfer functions
+
 
 clear E
 % Define symbolic variables
@@ -25,21 +30,14 @@ syms X Y Q
 Eq1 = subs(Eq1,{laplace(x(t), t, s),laplace(y(t), t, s)},{X,Y});
 Eq2 = subs(Eq2,{laplace(x(t), t, s),laplace(y(t), t, s)},{X,Y});
 
-Eq1 = subs(Eq1,{x(0),y(0),'D(x)(0)','D(y)(0)'},{0,0,0,0})
-Eq2 = subs(Eq2,{x(0),y(0),'D(x)(0)','D(y)(0)'},{0,0,0,0})
-
-% Replace input with its laplace transform derived by hand
-
-%Eq1 = subs(Eq1,{laplace(q(t), t, s)},...
-    %{(A*omega*exp(-s*T) * (exp(-s*T)+1))/(s^2 + omega^2)});
-%Eq2 = subs(Eq2,{laplace(q(t), t, s)},...
-    %{(A*omega*exp(-s*T) * (exp(-s*T)+1))/(s^2 + omega^2)});
+Eq1 = subs(Eq1,{x(0),y(0),'D(x)(0)','D(y)(0)'},{0,0,0,0});
+Eq2 = subs(Eq2,{x(0),y(0),'D(x)(0)','D(y)(0)'},{0,0,0,0});
     
 Eq1 = subs(Eq1,{laplace(q(t), t, s)},{Q});
 Eq2 = subs(Eq2,{laplace(q(t), t, s)},{Q});
 
-Eq1 = subs(Eq1,{q(0)},{0})
-Eq2 = subs(Eq2,{q(0)},{0})
+Eq1 = subs(Eq1,{q(0)},{0});
+Eq2 = subs(Eq2,{q(0)},{0});
 
 
 % Solve it!
@@ -48,6 +46,7 @@ Eq2 = subs(Eq2,{q(0)},{0})
 X = simplify(X);
 Y = simplify(Y);
 
+% Display below
 pretty(X)
 pretty(Y)
 
@@ -60,40 +59,65 @@ kt = 181818.88;
 ct = 13.854;
 ks = 34967;
 cs = 905.2896;
+L = 5.2;
+V = 10;
+T = L/(V*1000/3600);
+omega = pi/T;
 
-% Input transfer function of sprung mass X
+
+
+% Input transfer function of sprung mass X, as derived above
 
 Xtf = tf([-ct*cs, cs*kt-ct*ks, kt*ks],[ms*mu, cs*ms-ct*ms+cs*mu, ...
     ks*ms+kt*ms+ks*mu-cs*ct, cs*kt-ct*ks, ks*kt]);
 
-t_vect = linspace(0,0.468*5,300);
+Ytf = tf([-ct*ms, kt*ms-ct*cs, kt*cs-ct*ks, kt*ks],...
+    [ms*mu, cs*ms-ct*ms+cs*mu, ks*ms+kt*ms+ks*mu-cs*ct, cs*kt-ct*ks, ks*kt]);
+
+% Perform a simulation at 10 kph
+
+t_vect = linspace(0,T*5,300);
 q_vect = zeros(1,length(t_vect));
-q_vect(1,1:60) = 0.1*sin(6.7128.*t_vect(1,1:60));
+q_vect(1,1:60) = 0.1*sin(omega.*t_vect(1,1:60));
 [xs_final, t_final] = lsim(Xtf,q_vect,t_vect);
+[xu_final, t_final] = lsim(Ytf,q_vect,t_vect);
 
+figure
+hold on
 plot(t_final,xs_final)
+xlabel('Time [seconds]')
+ylabel('Sprung mass position m_s [meters]');
+hold off
+
+figure
+hold on
+plot(t_final,xu_final)
+xlabel('Time [seconds]')
+ylabel('Unsprung mass position m_u [meters]');
+hold off
 
 
-% % Substitute in actual values for our constants
-% 
-% X = subs(X,{k,m,c,omega,A,mu,kt,ct,T},...
-%     {34967,236.12,905.2896,6.7128,.1,23.61,181818.88,13.854,.468})
-% 
-% Y = subs(Y,{k,m,c,omega,A,mu,kt,ct,T},...
-%     {34967,236.12,905.2896,6.7128,.1,23.61,181818.88,13.854,.468})
-% 
-% % Invert the laplace transform
-% 
-% syms x1(t) y1(t)
-% x1(t) = ilaplace(X, s, t);
-% y1(t) = ilaplace(Y, s, t);
-% 
-% simplify(x1(t));
-% simplify(y1(t));
+% Now evaluate at 40 kph
 
+V = 40;
+T = L/(V*1000/3600);
+omega = pi/T;
+t_vect = linspace(0,T*5,300);
+q_vect = zeros(1,length(t_vect));
+q_vect(1,1:60) = 0.1*sin(omega.*t_vect(1,1:60));
+[xs_final, t_final] = lsim(Xtf,q_vect,t_vect);
+[xu_final, t_final] = lsim(Ytf,q_vect,t_vect);
 
+figure
+hold on
+plot(t_final,xs_final)
+xlabel('Time [seconds]')
+ylabel('Sprung mass position m_s [meters]');
+hold off
 
-
-
-
-
+figure
+hold on
+plot(t_final,xu_final)
+xlabel('Time [seconds]')
+ylabel('Unsprung mass position m_u [meters]');
+hold off
