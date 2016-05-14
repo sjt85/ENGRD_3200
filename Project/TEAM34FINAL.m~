@@ -64,12 +64,12 @@ omega = pi/T;
 
 % Run the simulation with two different step size h0, and h1
 h0 = T/100;
-number0 = 5*T/h0;
+number0 = 5*T/
 h1 = T/50;
-number1 = 5*T/h1;
 % Call the fourth-order Runge-Kutta function to solve a system of ODEs
-[t0,y0] = rk4sys(@dydtsys,linspace(0,5*T,number0),x,h0);
-[t1,y1] = rk4sys(@dydtsys,linspace(0,5*T,number1),x,h1);
+[t0,y0] = rk4sys(@dydtsys,linspace(0,5*T,,x,h0);
+[t1,y1] = rk4sys(@dydtsys,[0,5*T],x,h1);
+
 
 % figure(3)
 % subplot(1,4,1),plot(t,y(:,3))
@@ -87,6 +87,7 @@ number1 = 5*T/h1;
 % subplot(1,4,4),plot(t,y(:,2))
 % xlabel('Time [s]')
 % ylabel('Velocity of Sprung Mass [m/s]')
+
 
 
 hold on
