@@ -84,16 +84,18 @@ q_vect(1,1:60) = 0.1*sin(omega.*t_vect(1,1:60));
 
 figure
 hold on
+box on
 plot(t_final,xs_final)
 xlabel('Time [seconds]')
-ylabel('Sprung mass position m_s [meters]');
+ylabel('Sprung mass position x_s [meters]');
 hold off
 
 figure
 hold on
+box on
 plot(t_final,xu_final)
 xlabel('Time [seconds]')
-ylabel('Unsprung mass position m_u [meters]');
+ylabel('Unsprung mass position x_u [meters]');
 hold off
 
 
@@ -110,14 +112,16 @@ q_vect(1,1:60) = 0.1*sin(omega.*t_vect(1,1:60));
 
 figure
 hold on
+box on
 plot(t_final,xs_final)
 xlabel('Time [seconds]')
-ylabel('Sprung mass position m_s [meters]');
+ylabel('Sprung mass position x_s [meters]');
 hold off
 
 figure
 hold on
+box on
 plot(t_final,xu_final)
 xlabel('Time [seconds]')
-ylabel('Unsprung mass position m_u [meters]');
+ylabel('Unsprung mass position x_u [meters]');
 hold off
