@@ -12,7 +12,7 @@ ms = 236.12;           % Sprung mass
 mu = 23.61;            % Unsprung mass
 kt = 181818.88;        % Tire Stiffness
 ct = 13.854;           % Tire Damping Coefficient
-V = 40;                % Velocity of the car
+V = 10;                % Velocity of the car
 L = 5.2;               % Length
 
 % T is the time needed for the car to go over the bump

@@ -1,4 +1,4 @@
-function [ ] = TEAM34FINAL( )
+function [MaxAcc,xsv,xsa ] = TEAM34FINAL( )
 % Master function for ENGRD 3200 Final Project
 % Is broken into 3 parts:
 %   1)  Quarter Car Model
@@ -57,7 +57,7 @@ hold off
 % Vector x stores the initial conditions for Xu, Vu, Xs, Vs
 x = [0 0 0 0];                     % V is the velocity
 L = 5.2;  
-V = 40;              % Velocity of the car
+V = 10;              % Velocity of the car
 L = 5.2;               % Length
 T = L/(V*1000/3600);
 omega = pi/T;
@@ -68,10 +68,31 @@ number0 = 4/h0;
 % h1 = T/200;
 % number1 = 5*T/h1;
 % Call the fourth-order Runge-Kutta function to solve a system of ODEs
-[t,y] = rk4sys(@dydtsys,linspace(0,4,number0),x,h0);
 % [t1,y1] = rk4sys(@dydtsys,linspace(0,5*T,number1),x,h1);
 
+
+
+[t,y] = rk4sys(@dydtsys,linspace(0,4,number0),x,h0);
+
+% Extract the solution for Vs into xsv
+xsv = y(:,2);                 
+xsa(1) = 0;
+for j = 1:length(xsv)-2
+    % Apply the finite difference formula
+    % Store the acceleration in a vector xsa
+    xsa(j) = (xsv(j+1)-xsv(j))/(h0);
+end
+MaxAcc = max(abs(xsa));
+hold on
 figure(3)
+box on
+plot(t(2:length(t)-1),xsa)
+xlabel('Time [s]')
+ylabel('Acceleration Sprung Mass [m/s^2]')
+title('Acceleration vs. Time with V = 40 km/h')
+hold off
+
+figure(4)
 subplot(4,1,1),plot(t,y(:,3))
 xlabel('Time [s]')
 ylabel('Xu [m]')
