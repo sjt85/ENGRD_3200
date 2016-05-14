@@ -39,6 +39,13 @@ Eq2 = subs(Eq2,{laplace(q(t), t, s)},{Q});
 Eq1 = subs(Eq1,{q(0)},{0});
 Eq2 = subs(Eq2,{q(0)},{0});
 
+Eq1 = simplify(Eq1);
+Eq2 = simplify(Eq2);
+
+% Display below
+pretty(Eq1)
+pretty(Eq2)
+
 
 % Solve it!
 [X, Y] = solve(Eq1, Eq2, X, Y);
