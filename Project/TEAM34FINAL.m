@@ -90,24 +90,24 @@ ylabel('Vs [m/s]')
 
 
 % Forward Euler
-[t_euler,y_euler] = ForwardEuler(@dydtsys,5*T,[0,0,0,0],T/200);
+[t_euler,y_euler] = ForwardEuler(@dydtsys,4,[0,0,0,0],T/120);
 
 figure(4)
 subplot(4,1,1),plot(t_euler,y_euler(:,3))
-xlabel('Time [s]')
-ylabel('Xu [m] Euler')
+set(gca,'xticklabel',[])
+ylabel('X_u [m]')
 
 subplot(4,1,2),plot(t_euler,y_euler(:,1))
-xlabel('Time [s]')
-ylabel('Xs [m] Euler')
+set(gca,'xticklabel',[])
+ylabel('X_s [m]')
 
 subplot(4,1,3),plot(t_euler,y_euler(:,4))
-xlabel('Time [s]')
-ylabel('Vu [m/s] Euler')
+set(gca,'xticklabel',[])
+ylabel('V_u [m/s]')
 
 subplot(4,1,4),plot(t_euler,y_euler(:,2))
 xlabel('Time [s]')
-ylabel('Vs [m/s] Euler')
+ylabel('V_s [m/s]')
 
 % figure(3)
 % box on
