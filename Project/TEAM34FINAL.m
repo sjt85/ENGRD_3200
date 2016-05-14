@@ -89,7 +89,26 @@ xlabel('Time [s]')
 ylabel('Vs [m/s]')
 
 
-% hold on
+% Forward Euler
+[t_euler,y_euler] = ForwardEuler(@dydtsys,5*T,[0,0,0,0],T/200);
+
+figure(4)
+subplot(4,1,1),plot(t_euler,y_euler(:,3))
+xlabel('Time [s]')
+ylabel('Xu [m] Euler')
+
+subplot(4,1,2),plot(t_euler,y_euler(:,1))
+xlabel('Time [s]')
+ylabel('Xs [m] Euler')
+
+subplot(4,1,3),plot(t_euler,y_euler(:,4))
+xlabel('Time [s]')
+ylabel('Vu [m/s] Euler')
+
+subplot(4,1,4),plot(t_euler,y_euler(:,2))
+xlabel('Time [s]')
+ylabel('Vs [m/s] Euler')
+
 % figure(3)
 % box on
 % plot(t0,y0(:,1),'r',t1,y1(:,1))
