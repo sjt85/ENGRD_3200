@@ -130,6 +130,36 @@ subplot(4,1,4),plot(t_euler,y_euler(:,2))
 xlabel('Time [s]')
 ylabel('V_s [m/s]')
 
+
+%%% Compare Forward Euler and RK4 %%%
+
+% Find stepsize needed to reduce error to 10^-3
+
+% Get the basis off of which to compare
+    % If all we're interested in is x(2*T), that's all the further we need
+    % to evaluate
+    
+[t_rk,y_rk] = rk4sys(@dydtsys,[0,2*T],[0,0,0,0],T/100);
+
+error = 1;  % Initialize
+h = T/120;
+
+while error
+    % Halve the stepsize, find new error
+    h = h/2;
+    blah = blah+1;
+    [t_euler,y_euler] = ForwardEuler(@dydtsys,2*T,[0,0,0,0],h);
+    errors = abs(y_rk(length(t_rk),:)-y_euler(length(t_euler),:));
+    error = max(errors) > 10^(-3);
+end
+
+disp(h)
+
+
+
+
+
+
 % figure(3)
 % box on
 % plot(t0,y0(:,1),'r',t1,y1(:,1))
