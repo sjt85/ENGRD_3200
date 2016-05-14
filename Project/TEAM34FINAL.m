@@ -64,48 +64,48 @@ omega = pi/T;
 
 % Run the simulation with two different step size h0, and h1
 h0 = T/100;
-number0 = 5*T/h0;
-h1 = T/50;
-number1 = 5*T/h1;
+number0 = 4/h0;
+% h1 = T/200;
+% number1 = 5*T/h1;
 % Call the fourth-order Runge-Kutta function to solve a system of ODEs
-[t0,y0] = rk4sys(@dydtsys,linspace(0,5*T,number0),x,h0);
-[t1,y1] = rk4sys(@dydtsys,linspace(0,5*T,number1),x,h1);
+[t,y] = rk4sys(@dydtsys,linspace(0,4,number0),x,h0);
+% [t1,y1] = rk4sys(@dydtsys,linspace(0,5*T,number1),x,h1);
 
+figure(3)
+subplot(4,1,1),plot(t,y(:,3))
+xlabel('Time [s]')
+ylabel('Xu [m]')
+
+subplot(4,1,2),plot(t,y(:,1))
+xlabel('Time [s]')
+ylabel('Xs [m]')
+
+subplot(4,1,3),plot(t,y(:,4))
+xlabel('Time [s]')
+ylabel('Vu [m/s]')
+
+subplot(4,1,4),plot(t,y(:,2))
+xlabel('Time [s]')
+ylabel('Vs [m/s]')
+
+
+% hold on
 % figure(3)
-% subplot(1,4,1),plot(t,y(:,3))
-% xlabel('Time [s]')
-% ylabel('Displacement of Unsprung Mass [m]')
-% 
-% subplot(1,4,2),plot(t,y(:,1))
+% box on
+% plot(t0,y0(:,1),'r',t1,y1(:,1))
 % xlabel('Time [s]')
 % ylabel('Displacement of Sprung Mass [m]')
+% legend('Step Size T/100','Step Size T/200','Location','NorthEast')
+% hold off
 % 
-% subplot(1,4,3),plot(t,y(:,4))
+% hold on
+% figure(4)
+% box on
+% plot(t0,y0(:,3),'r',t1,y1(:,3))
 % xlabel('Time [s]')
-% ylabel('Velocity of Unsprung Mass [m/s]')
-% 
-% subplot(1,4,4),plot(t,y(:,2))
-% xlabel('Time [s]')
-% ylabel('Velocity of Sprung Mass [m/s]')
-
-
-hold on
-figure(3)
-box on
-plot(t0,y0(:,1),'r',t1,y1(:,1))
-xlabel('Time [s]')
-ylabel('Displacement of Sprung Mass [m]')
-legend('Step Size T/100','Step Size T/50','Location','NorthEast')
-hold off
-
-hold on
-figure(4)
-box on
-plot(t0,y0(:,3),'r',t1,y1(:,3))
-xlabel('Time [s]')
-ylabel('Displacement of Unsprung Mass [m]')
-legend('Step Size T/100','Step Size T/50','Location','NorthEast')
-hold off
+% ylabel('Displacement of Unsprung Mass [m]')
+% legend('Step Size T/100','Step Size T/200','Location','NorthEast')
+% hold off
 
 
 % Perform first order linear fit on experimental spring and dashpot data

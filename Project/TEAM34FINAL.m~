@@ -57,56 +57,55 @@ hold off
 % Vector x stores the initial conditions for Xu, Vu, Xs, Vs
 x = [0 0 0 0];                     % V is the velocity
 L = 5.2;  
-V = 40;              % Velocity of the car
+V = 10;              % Velocity of the car
 L = 5.2;               % Length
 T = L/(V*1000/3600);
 omega = pi/T;
 
 % Run the simulation with two different step size h0, and h1
 h0 = T/100;
-number0 = 5*T/
-h1 = T/50;
+number0 = 5*T/h0;
+% h1 = T/200;
+% number1 = 5*T/h1;
 % Call the fourth-order Runge-Kutta function to solve a system of ODEs
-[t0,y0] = rk4sys(@dydtsys,linspace(0,5*T,,x,h0);
-[t1,y1] = rk4sys(@dydtsys,[0,5*T],x,h1);
+[t,y] = rk4sys(@dydtsys,linspace(0,5*T,number0),x,h0);
+% [t1,y1] = rk4sys(@dydtsys,linspace(0,5*T,number1),x,h1);
 
-
-% figure(3)
-% subplot(1,4,1),plot(t,y(:,3))
-% xlabel('Time [s]')
-% ylabel('Displacement of Unsprung Mass [m]')
-% 
-% subplot(1,4,2),plot(t,y(:,1))
-% xlabel('Time [s]')
-% ylabel('Displacement of Sprung Mass [m]')
-% 
-% subplot(1,4,3),plot(t,y(:,4))
-% xlabel('Time [s]')
-% ylabel('Velocity of Unsprung Mass [m/s]')
-% 
-% subplot(1,4,4),plot(t,y(:,2))
-% xlabel('Time [s]')
-% ylabel('Velocity of Sprung Mass [m/s]')
-
-
-
-hold on
 figure(3)
-box on
-plot(t0,y0(:,1),'r',t1,y1(:,1))
-xlabel('Time [s]')
-ylabel('Displacement of Sprung Mass [m]')
-legend('Step Size T/100','Step Size T/50','Location','NorthEast')
-hold off
-
-hold on
-figure(4)
-box on
-plot(t0,y0(:,3),'r',t1,y1(:,3))
+subplot(1,4,1),plot(t,y(:,3))
 xlabel('Time [s]')
 ylabel('Displacement of Unsprung Mass [m]')
-legend('Step Size T/100','Step Size T/50','Location','NorthEast')
-hold off
+
+subplot(1,4,2),plot(t,y(:,1))
+xlabel('Time [s]')
+ylabel('Displacement of Sprung Mass [m]')
+
+subplot(1,4,3),plot(t,y(:,4))
+xlabel('Time [s]')
+ylabel('Velocity of Unsprung Mass [m/s]')
+
+subplot(1,4,4),plot(t,y(:,2))
+xlabel('Time [s]')
+ylabel('Velocity of Sprung Mass [m/s]')
+
+
+% hold on
+% figure(3)
+% box on
+% plot(t0,y0(:,1),'r',t1,y1(:,1))
+% xlabel('Time [s]')
+% ylabel('Displacement of Sprung Mass [m]')
+% legend('Step Size T/100','Step Size T/200','Location','NorthEast')
+% hold off
+% 
+% hold on
+% figure(4)
+% box on
+% plot(t0,y0(:,3),'r',t1,y1(:,3))
+% xlabel('Time [s]')
+% ylabel('Displacement of Unsprung Mass [m]')
+% legend('Step Size T/100','Step Size T/200','Location','NorthEast')
+% hold off
 
 
 % Perform first order linear fit on experimental spring and dashpot data
