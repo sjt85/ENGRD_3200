@@ -65,7 +65,7 @@ knew_vals = knew(1) .* k_pts;
 cnew_vals = cnew(1) .* c_pts;
 
 
-figure(5)
+figure(3)
 hold on
 scatter(Fsp(2,:),Fsp(1,:))
 plot(k_pts,knew_vals)
@@ -75,7 +75,7 @@ ylabel('Spring Force [N]')
 legend('Original Data','First Order Linear Fit','Location','NorthWest')
 hold off
 
-figure(6)
+figure(4)
 hold on
 scatter(Fd(2,:),Fd(1,:))
 plot(c_pts,cnew_vals)
@@ -91,7 +91,7 @@ hold off
 % Vector x stores the initial conditions for Xu, Vu, Xs, Vs
 x = [0 0 0 0];                     % V is the velocity
 L = 5.2;  
-V = 10;              % Velocity of the car
+V = 40;              % Velocity of the car
 L = 5.2;               % Length
 T = L/(V*1000/3600);
 omega = pi/T;
@@ -127,7 +127,7 @@ MaxAcc = max(abs(xsa));
 % title('Acceleration vs. Time with V = 40 km/h')
 % hold off
 
-figure(4)
+figure(5)
 subplot(4,1,1),plot(t,y(:,3))
 xlabel('Time [s]')
 ylabel('Xu [m]')
@@ -150,7 +150,7 @@ ylabel('Vs [m/s]')
 
 [t_euler,y_euler] = ForwardEuler(@dydtsys,4,[0,0,0,0],T/120);
 
-figure(4)
+figure(6)
 subplot(4,1,1),plot(t_euler,y_euler(:,3))
 set(gca,'xticklabel',[])
 ylabel('X_u [m]')
