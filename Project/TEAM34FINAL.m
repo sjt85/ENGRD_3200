@@ -25,7 +25,7 @@ global c
 
 [c,ConNum_c,theta_c] = polylsq(Fd(2,:)',Fd(1,:)',11,2);    %Quadratic fit
 
-% Begin graphing
+% Begin graphing spring and dashpot fits
 
 k_pts = linspace(-.11,.11,300);
 c_pts = linspace(-1.1,1.1,300);
@@ -53,6 +53,40 @@ xlabel('Damper Velocity [m/s]')
 ylabel('Damping Force [N]')
 legend('Original Data','Least Squares Quadratic Fit','Location','NorthWest')
 hold off
+
+
+% Perform first order linear fit on experimental spring and dashpot data
+% in order to do the Laplace Transformation
+[knew,ConNum_k,theta_k] = polylsq(Fsp(2,:)',Fsp(1,:)',11,1); % Linear fit
+
+[cnew,ConNum_c,theta_c] = polylsq(Fd(2,:)',Fd(1,:)',11,1);  % Linear fit
+
+knew_vals = knew(1) .* k_pts;
+cnew_vals = cnew(1) .* c_pts;
+
+
+figure(5)
+hold on
+scatter(Fsp(2,:),Fsp(1,:))
+plot(k_pts,knew_vals)
+box on
+xlabel('Spring Displacement [m]')
+ylabel('Spring Force [N]')
+legend('Original Data','First Order Linear Fit','Location','NorthWest')
+hold off
+
+figure(6)
+hold on
+scatter(Fd(2,:),Fd(1,:))
+plot(c_pts,cnew_vals)
+box on
+xlabel('Damper Velocity [m/s]')
+ylabel('Damping Force [N]')
+legend('Original Data','First Order Linear Fit','Location','NorthWest')
+hold off
+
+
+%%% Part 2:  Simulation %%%
 
 % Vector x stores the initial conditions for Xu, Vu, Xs, Vs
 x = [0 0 0 0];                     % V is the velocity
@@ -111,7 +145,9 @@ xlabel('Time [s]')
 ylabel('Vs [m/s]')
 
 
-% Forward Euler
+%%% Forward Euler %%%
+% Show Euler solution at first stable stepsize
+
 [t_euler,y_euler] = ForwardEuler(@dydtsys,4,[0,0,0,0],T/120);
 
 figure(4)
@@ -184,34 +220,7 @@ disp(h)
 % hold off
 
 
-% Perform first order linear fit on experimental spring and dashpot data
-% in order to do the Laplace Transformation
-[knew,ConNum_k,theta_k] = polylsq(Fsp(2,:)',Fsp(1,:)',11,1); % Linear fit
-
-[cnew,ConNum_c,theta_c] = polylsq(Fd(2,:)',Fd(1,:)',11,1);  % Linear fit
-
-knew_vals = knew(1) .* k_pts;
-cnew_vals = cnew(1) .* c_pts;
 
 
-figure(5)
-hold on
-scatter(Fsp(2,:),Fsp(1,:))
-plot(k_pts,knew_vals)
-box on
-xlabel('Spring Displacement [m]')
-ylabel('Spring Force [N]')
-legend('Original Data','First Order Linear Fit','Location','NorthWest')
-hold off
-
-figure(6)
-hold on
-scatter(Fd(2,:),Fd(1,:))
-plot(c_pts,cnew_vals)
-box on
-xlabel('Damper Velocity [m/s]')
-ylabel('Damping Force [N]')
-legend('Original Data','First Order Linear Fit','Location','NorthWest')
-hold off
  end
 
