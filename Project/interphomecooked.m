@@ -1,10 +1,15 @@
-function fout = interphomecooked(xdata,f,n,xout)
+function fout = interphomecooked(xout,params)
 % Computes and plots the Lagrange form of the global interpolating
 % polynomial
 % Computes Lagrange interpolant functions for an arbitrary dataset
 % Plots L_N,i for i = 0,1,2 and i = 3,4,5
 % Plots the global interpolating polynomial along with original data
 % Performs a second run, sampling at xout and returns xdata
+
+% Extract extra parameters
+xdata = cell2mat(params(1));
+f = cell2mat(params(2));
+n = cell2mat(params(3));
 
 
 % Set up spacing for use with the plots to have 200 points
@@ -60,7 +65,7 @@ hold on
 plot(x_points,P)
 scatter(xdata,f)
 for i = 1:6
-    line([xdata(i); xdata(i)],[1; .6],'Color','k','LineStyle','--');
+    line([xdata(i); xdata(i)],[.006; -.006],'Color','k','LineStyle','--');
 end
 box on
 hold off

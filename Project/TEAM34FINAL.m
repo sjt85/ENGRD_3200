@@ -232,6 +232,24 @@ disp(h)
 % Just make a block diagram first
 
 
+%[t,y] = rk4sys(@dydtsys,linspace(0,4,number0),x,h0);
+
+clear t_rk y_rk T
+
+T = 5.2/(40*1000/3600);
+    
+[t_rk,y_rk] = rk4sys(@dydtsys,[0,4],[0,0,0,0],T/50);
+
+sampled_t = transpose(t_rk(1,199:204));
+sampled_x = y_rk(199:204,1);
+
+params = {sampled_t,sampled_x,5};
+root = bisect(@interphomecooked,sampled_t(1),sampled_t(6),.001,50,params);
+
+
+
+
+
 
 
  end
