@@ -143,16 +143,16 @@ ylabel('V_s [m/s]')
 
 T = 5.2/(40*1000/3600);
     
-[t_rk,y_rk] = rk4sys(@dydtsys,[0,2*T],[0,0,0,0],T/100);
+[t_rk,y_rk] = rk4sys(@dydtsys,[0,2*T],[0,0,0,0],T/50);
 
 error = 1;  % Initialize
-h = T/60;
+h = T/108;
 
 clear t_euler y_euler
 
 while error
-    % Halve the stepsize, find new error
-    h = h/2;
+    % Diminish the stepsize, find new error
+    h = h*.9;
     [t_euler,y_euler] = ForwardEuler(@dydtsys,2*T,[0,0,0,0],h);
     errors = abs(y_rk(length(t_rk),:) - y_euler(length(t_euler),:));
     error = max(errors) > 10^(-3);
