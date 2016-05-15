@@ -221,6 +221,18 @@ disp(h)
 
 
 
+%%% Find Zero Crossing
+
+% clear old rk4 data
+
+% numerically solve ODE
+
+% store the six points around our zero crossing into one variable
+
+% Just make a block diagram first
+
+
+
 
  end
 
