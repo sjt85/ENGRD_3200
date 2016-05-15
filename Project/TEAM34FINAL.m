@@ -139,17 +139,22 @@ ylabel('V_s [m/s]')
     % If all we're interested in is x(2*T), that's all the further we need
     % to evaluate
     
+% Make sure we're evaluating at 40 kph
+
+T = 5.2/(40*1000/3600);
+    
 [t_rk,y_rk] = rk4sys(@dydtsys,[0,2*T],[0,0,0,0],T/100);
 
 error = 1;  % Initialize
-h = T/120;
+h = T/60;
+
+clear t_euler y_euler
 
 while error
     % Halve the stepsize, find new error
     h = h/2;
-    blah = blah+1;
     [t_euler,y_euler] = ForwardEuler(@dydtsys,2*T,[0,0,0,0],h);
-    errors = abs(y_rk(length(t_rk),:)-y_euler(length(t_euler),:));
+    errors = abs(y_rk(length(t_rk),:) - y_euler(length(t_euler),:));
     error = max(errors) > 10^(-3);
 end
 
