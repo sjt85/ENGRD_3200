@@ -214,6 +214,30 @@ end
 
 disp(h)
 
+
+
+
+
+
+% figure(3)
+% box on
+% plot(t0,y0(:,1),'r',t1,y1(:,1))
+% xlabel('Time [s]')
+% ylabel('Displacement of Sprung Mass [m]')
+% legend('Step Size T/100','Step Size T/200','Location','NorthEast')
+% hold off
+% 
+% hold on
+% figure(4)
+% box on
+% plot(t0,y0(:,3),'r',t1,y1(:,3))
+% xlabel('Time [s]')
+% ylabel('Displacement of Unsprung Mass [m]')
+% legend('Step Size T/100','Step Size T/200','Location','NorthEast')
+% hold off
+
+
+
 %%% Find Zero Crossing
 
 % Start first at 10 kph
