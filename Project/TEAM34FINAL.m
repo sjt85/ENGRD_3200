@@ -206,7 +206,7 @@ end
 
 disp(h)
 
-%%% Find Zero Crossing
+%%% Find Zero Crossing %%%
 
 % Start first at 10 kph
 % Clear old rk4 data
@@ -265,9 +265,30 @@ T = 5.2/(10*1000/3600);
 delta_x = y_rk(:,2) - y_rk(:,4);
 F_d = c(1)*delta_x + c(2) * delta_x .^2;
 Fd_deltax = F_d .* delta_x;
-energy = trapz(transpose(t_rk),Fd_deltax);
+energy_trap = trapz(transpose(t_rk),Fd_deltax);
+energy_simp = simpson(transpose(t_rk),Fd_deltax);
 
-fprintf('Energy is %f \n',energy);
+fprintf('Energy using trapz at 10 kph is %f \n',energy_trap);
+fprintf('Energy using simpson at 10 kph is %f \n',energy_simp);
+
+
+% Now simulate at 40 kph
+
+% Clear old rk4 data
+clear t_rk y_rk T F_d Fd_deltax
+T = 5.2/(40*1000/3600);
+
+% Solve the ODE real quick
+[t_rk,y_rk] = rk4sys(@dydtsys40,[0,T],[0,0,0,0],T/50);
+
+delta_x = y_rk(:,2) - y_rk(:,4);
+F_d = c(1)*delta_x + c(2) * delta_x .^2;
+Fd_deltax = F_d .* delta_x;
+energy_trap = trapz(transpose(t_rk),Fd_deltax);
+energy_simp = simpson(transpose(t_rk),Fd_deltax);
+
+fprintf('Energy using trapz at 40 kph is %f \n',energy_trap);
+fprintf('Energy using simpson at 40 kph is %f \n',energy_simp);
 
 
 
