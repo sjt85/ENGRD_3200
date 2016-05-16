@@ -223,31 +223,47 @@ disp(h)
 
 %%% Find Zero Crossing
 
-% clear old rk4 data
-
-% numerically solve ODE
-
-% store the six points around our zero crossing into one variable
-
-% Just make a block diagram first
-
-
-%[t,y] = rk4sys(@dydtsys,linspace(0,4,number0),x,h0);
-
+% Start first at 10 kph
+% Clear old rk4 data
 clear t_rk y_rk T
+T = 5.2/(10*1000/3600);
 
-T = 5.2/(40*1000/3600);
-    
-[t_rk,y_rk] = rk4sys(@dydtsys,[0,4],[0,0,0,0],T/50);
+% Solve the ODE real quick
+[t_rk,y_rk] = rk4sys(@dydtsys10,[0,4],[0,0,0,0],T/100);
 
-sampled_t = transpose(t_rk(1,199:204));
-sampled_x = y_rk(199:204,1);
+% Package up the 6 data points around our crossing
+sampled_t = transpose(t_rk(1,99:104));
+sampled_x = y_rk(99:104,1);
 
 params = {sampled_t,sampled_x,5};
+
+% Use bisection and interpolation to find root
 root = bisect(@interphomecooked,sampled_t(1),sampled_t(6),.001,50,params);
 
 
+fprintf('The first zero crossing for the sprung mass at 10 kph is at %f seconds \n',root)
 
+
+% Now simulate at 40 kph
+
+% Clear old rk4 data
+clear t_rk y_rk T
+T = 5.2/(40*1000/3600);
+
+% Solve the ODE real quick
+[t_rk,y_rk] = rk4sys(@dydtsys40,[0,4],[0,0,0,0],T/50);
+
+% Package up the 6 data points around our crossing
+sampled_t = transpose(t_rk(1,57:62));
+sampled_x = y_rk(57:62,1);
+
+params = {sampled_t,sampled_x,5};
+
+% Use bisection and interpolation to find root
+root = bisect(@interphomecooked,sampled_t(1),sampled_t(6),.001,50,params);
+
+
+fprintf('The first zero crossing for the sprung mass at 40 kph is at %f seconds \n',root)
 
 
 
