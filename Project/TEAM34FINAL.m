@@ -118,14 +118,6 @@ for j = 2:length(xsv)-1
     xsa(j) = (xsv(j)-xsv(j-1))/(h0);
 end
 MaxAcc = max(abs(xsa));
-% hold on
-% figure(3)
-% box on
-% plot(t(2:length(t)-1),xsa)
-% xlabel('Time [s]')
-% ylabel('Acceleration Sprung Mass [m/s^2]')
-% title('Acceleration vs. Time with V = 40 km/h')
-% hold off
 
 figure(5)
 subplot(4,1,1),plot(t,y(:,3))
