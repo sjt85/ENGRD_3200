@@ -259,6 +259,24 @@ root = bisect(@interphomecooked,sampled_t(1),sampled_t(6),.001,50,params);
 fprintf('The first zero crossing for the sprung mass at 40 kph is at %f seconds \n',root)
 
 
+%%% Compute how much energy is lost due to damping %%%
+
+% First simulate at 10 kph
+
+% Clear old rk4 data
+clear t_rk y_rk T
+T = 5.2/(10*1000/3600);
+
+% Solve the ODE real quick
+[t_rk,y_rk] = rk4sys(@dydtsys10,[0,T],[0,0,0,0],T/100);
+
+delta_x = y_rk(:,2) - y_rk(:,4);
+F_d = c(1)*delta_x + c(2) * delta_x .^2;
+Fd_deltax = F_d .* delta_x;
+energy = trapz(transpose(t_rk),Fd_deltax);
+
+fprintf('Energy is %f \n',energy);
+
 
 
  end
