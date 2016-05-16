@@ -46,10 +46,3 @@ xdot(4,1)=(1/mu)*(kt*(q-x(3))+ct*(qdot-x(4))+Fsp+Fd);
 
 end
 
-function [ output_args ] = untitled( input_args )
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
-
-
-end
-
