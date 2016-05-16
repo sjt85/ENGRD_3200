@@ -1,4 +1,4 @@
-function xdot = dydtsys(t,x)
+function xdot = dydtsys40(t,x)
 % The function dydtsys is used to hold the ODEs
 % t is the current time (a single number).
 % x is a four element vector;
@@ -43,6 +43,13 @@ xdot(1,1)=x(2);
 xdot(2,1)=-1/ms*(Fsp+Fd);
 xdot(3,1)=x(4);
 xdot(4,1)=(1/mu)*(kt*(q-x(3))+ct*(qdot-x(4))+Fsp+Fd);
+
+end
+
+function [ output_args ] = untitled( input_args )
+%UNTITLED Summary of this function goes here
+%   Detailed explanation goes here
+
 
 end
 
